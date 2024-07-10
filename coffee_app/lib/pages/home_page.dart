@@ -1,4 +1,5 @@
 import 'package:coffee_app/components/bottom_nav_bar.dart';
+import 'package:coffee_app/components/pop_up_menu.dart';
 import 'package:coffee_app/pages/cart_page.dart';
 import 'package:coffee_app/pages/shop_page.dart';
 import 'package:flutter/material.dart';
@@ -29,8 +30,8 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 248, 244, 225),
       appBar: AppBar(
-        scrolledUnderElevation:
-            0, // keep color of appbar same when scrolling down
+        // keep color of appbar same when scrolling down
+        scrolledUnderElevation: 0,
         backgroundColor: Colors.transparent,
         elevation: 0,
         title: const Text(
@@ -42,7 +43,7 @@ class _HomePageState extends State<HomePage> {
           onPressed: () {},
         ),
         actions: [
-          IconButton(onPressed: () {}, icon: const Icon(Icons.more_vert)),
+          IconButton(onPressed: () {}, icon: const PopUpMenu()),
         ],
       ),
       bottomNavigationBar: BottomNavBar(

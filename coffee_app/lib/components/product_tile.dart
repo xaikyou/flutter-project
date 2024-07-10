@@ -16,7 +16,7 @@ class ProductTile extends StatelessWidget {
       width: 200,
       padding: const EdgeInsets.all(15),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: Colors.white70,
         borderRadius: BorderRadius.circular(15),
       ),
       child: Center(
