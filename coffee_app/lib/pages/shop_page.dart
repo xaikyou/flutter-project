@@ -4,8 +4,27 @@ import 'package:coffee_app/models/product.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class ShopPage extends StatelessWidget {
+class ShopPage extends StatefulWidget {
   const ShopPage({super.key});
+
+  @override
+  State<ShopPage> createState() => _ShopPageState();
+}
+
+class _ShopPageState extends State<ShopPage> {
+  void addProductToCart(Product product) {
+    Provider.of<Cart>(context, listen: false).addItemToCart(product);
+
+    // alert the user: product successfully added
+    showDialog(
+        context: context,
+        builder: (context) => const AlertDialog(
+              title: Text("Successfully added!"),
+              content: Text("Please check your cart."),
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(10.0))),
+            ));
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -50,7 +69,10 @@ class ShopPage extends StatelessWidget {
                   scrollDirection: Axis.horizontal,
                   itemBuilder: (context, index) {
                     Product product = value.getCoffeeList()[index];
-                    return ProductTile(product: product);
+                    return ProductTile(
+                      product: product,
+                      onTap: () => addProductToCart(product),
+                    );
                   },
                 ),
               ),
@@ -73,7 +95,10 @@ class ShopPage extends StatelessWidget {
                   scrollDirection: Axis.horizontal,
                   itemBuilder: (context, index) {
                     Product product = value.getTeaList()[index];
-                    return ProductTile(product: product);
+                    return ProductTile(
+                      product: product,
+                      onTap: () => addProductToCart(product),
+                    );
                   },
                 ),
               ),
@@ -96,7 +121,10 @@ class ShopPage extends StatelessWidget {
                   scrollDirection: Axis.horizontal,
                   itemBuilder: (context, index) {
                     Product product = value.getCakeList()[index];
-                    return ProductTile(product: product);
+                    return ProductTile(
+                      product: product,
+                      onTap: () => addProductToCart(product),
+                    );
                   },
                 ),
               ),

@@ -5,9 +5,11 @@ class ProductTile extends StatelessWidget {
   const ProductTile({
     super.key,
     required this.product,
+    required this.onTap,
   });
 
   final Product product;
+  final Function()? onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -60,21 +62,25 @@ class ProductTile extends StatelessWidget {
                 ),
               ],
             ),
+            // Plus Button
             Positioned.fill(
               bottom: 0,
               child: Align(
                 alignment: Alignment.bottomCenter,
-                child: Container(
-                  height: 40,
-                  width: double.infinity,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    color: const Color.fromARGB(255, 175, 143, 111),
-                  ),
-                  child: const Icon(
-                    Icons.add,
-                    size: 24,
-                    color: Colors.black,
+                child: GestureDetector(
+                  onTap: onTap,
+                  child: Container(
+                    height: 40,
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      color: const Color.fromARGB(255, 175, 143, 111),
+                    ),
+                    child: const Icon(
+                      Icons.add,
+                      size: 24,
+                      color: Colors.black,
+                    ),
                   ),
                 ),
               ),

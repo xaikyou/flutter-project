@@ -89,7 +89,7 @@ class Cart extends ChangeNotifier {
     return userCart;
   }
 
-  void addItemFromCart(Product coffee) {
+  void addItemToCart(Product coffee) {
     userCart.add(coffee);
     notifyListeners();
   }
