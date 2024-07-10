@@ -42,6 +42,10 @@ class _CartPageState extends State<CartPage> {
             ));
   }
 
+  void removeFromCart(Product product) {
+    Provider.of<Cart>(context, listen: false).removeItemFromCart(product);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Consumer<Cart>(
@@ -67,6 +71,7 @@ class _CartPageState extends State<CartPage> {
                     Product individualProduct = value.getUserCart()[index];
                     return CartItem(
                       product: individualProduct,
+                      onTapDelete: () => removeFromCart(individualProduct),
                     );
                   },
                 ),
@@ -112,7 +117,7 @@ class _CartPageState extends State<CartPage> {
                         ),
                         child: const Center(
                             child: Text(
-                          'BUY NOW',
+                          'Buy Now',
                           style: TextStyle(
                               fontSize: 20,
                               fontWeight: FontWeight.bold,

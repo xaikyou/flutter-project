@@ -2,9 +2,10 @@ import 'package:coffee_app/models/product.dart';
 import 'package:flutter/material.dart';
 
 class CartItem extends StatefulWidget {
-  const CartItem({super.key, required this.product});
+  const CartItem({super.key, required this.product, required this.onTapDelete});
 
   final Product product;
+  final Function()? onTapDelete;
 
   @override
   State<CartItem> createState() => _CartItemState();
@@ -25,9 +26,7 @@ class _CartItemState extends State<CartItem> {
         subtitle: Text('\$${widget.product.price}'),
         trailing: IconButton(
           icon: const Icon(Icons.delete),
-          onPressed: () {
-            print('delete');
-          },
+          onPressed: widget.onTapDelete,
         ),
       ),
     );

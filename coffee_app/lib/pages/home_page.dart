@@ -38,13 +38,19 @@ class _HomePageState extends State<HomePage> {
           "Coffee On Road",
           style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
         ),
-        leading: IconButton(
-          icon: const Icon(Icons.menu),
-          onPressed: () {},
-        ),
         actions: [
           IconButton(onPressed: () {}, icon: const PopUpMenu()),
         ],
+      ),
+      drawer: const Drawer(
+        child: Center(
+            child: Padding(
+          padding: EdgeInsets.all(15.0),
+          child: Text(
+            'Wish you a lucky day with Flutter.\nFrom 10/7/2024',
+            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+          ),
+        )),
       ),
       bottomNavigationBar: BottomNavBar(
         onTabChange: (index) => navigateBottomBar(index),
