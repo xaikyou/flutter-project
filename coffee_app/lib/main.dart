@@ -1,5 +1,7 @@
+import 'package:coffee_app/models/cart.dart';
 import 'package:coffee_app/pages/home_page.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 void main() {
   runApp(const CoffeeApp());
@@ -10,10 +12,12 @@ class CoffeeApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: const HomePage(),
-      theme: ThemeData(fontFamily: 'Monospace'),
-    );
+    return ChangeNotifierProvider(
+        create: (context) => Cart(),
+        builder: (context, child) => MaterialApp(
+              debugShowCheckedModeBanner: false,
+              home: const HomePage(),
+              theme: ThemeData(fontFamily: 'Monospace'),
+            ));
   }
 }

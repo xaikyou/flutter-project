@@ -1,13 +1,13 @@
-import 'package:coffee_app/models/coffee.dart';
+import 'package:coffee_app/models/product.dart';
 import 'package:flutter/material.dart';
 
-class CoffeeTile extends StatelessWidget {
-  const CoffeeTile({
+class ProductTile extends StatelessWidget {
+  const ProductTile({
     super.key,
-    required this.coffee,
+    required this.product,
   });
 
-  final Coffee coffee;
+  final Product product;
 
   @override
   Widget build(BuildContext context) {
@@ -26,11 +26,11 @@ class CoffeeTile extends StatelessWidget {
             Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                // coffee image
+                // Product image
                 ClipRRect(
                   borderRadius: BorderRadius.circular(10),
                   child: Image.asset(
-                    coffee.imagePath,
+                    product.imagePath,
                     width: 120,
                     height: 120,
                     fit: BoxFit.cover,
@@ -40,7 +40,7 @@ class CoffeeTile extends StatelessWidget {
 
                 // description
                 Text(
-                  coffee.name,
+                  product.name,
                   textAlign: TextAlign.center,
                   style: const TextStyle(
                     fontSize: 17,
@@ -52,7 +52,7 @@ class CoffeeTile extends StatelessWidget {
                 ),
 
                 Text(
-                  coffee.price,
+                  product.price,
                   style: const TextStyle(
                     color: Color.fromARGB(255, 116, 81, 45),
                     fontSize: 15,
