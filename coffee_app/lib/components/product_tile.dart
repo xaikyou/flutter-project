@@ -40,7 +40,7 @@ class ProductTile extends StatelessWidget {
                 ),
                 const SizedBox(height: 8),
 
-                // description
+                // Product name
                 Text(
                   product.name,
                   textAlign: TextAlign.center,
@@ -53,8 +53,9 @@ class ProductTile extends StatelessWidget {
                       TextOverflow.ellipsis, // Handle overflow with ellipsis
                 ),
 
+                // Product price
                 Text(
-                  product.price,
+                  '\$${product.price}',
                   style: const TextStyle(
                     color: Color.fromARGB(255, 116, 81, 45),
                     fontSize: 15,
