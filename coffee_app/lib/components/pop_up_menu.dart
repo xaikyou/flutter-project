@@ -16,9 +16,7 @@ class _PopUpMenuState extends State<PopUpMenu> {
     switch (item) {
       case ItemMenu.settings:
         // Navigate to SettingsPage
-        // Navigator.of(context).push(MaterialPageRoute(
-        //   builder: (context) => SettingsPage(),
-        // ));
+        Navigator.pushNamed(context, '/settingspage');
         break;
       case ItemMenu.about:
         // Navigate to AboutPage
@@ -37,25 +35,40 @@ class _PopUpMenuState extends State<PopUpMenu> {
         setState(() {
           selectedMenu = item;
         });
+        navigateToPage(item);
       },
       itemBuilder: (BuildContext context) => <PopupMenuEntry<ItemMenu>>[
-        const PopupMenuItem<ItemMenu>(
+        PopupMenuItem<ItemMenu>(
           value: ItemMenu.settings,
           child: ListTile(
-            leading: Icon(Icons.settings),
-            title: Text('Settings'),
+            leading: Icon(
+              Icons.settings,
+              color: Theme.of(context).colorScheme.primary,
+            ),
+            title: Text(
+              'Settings',
+              style: TextStyle(
+                color: Theme.of(context).colorScheme.primary,
+              ),
+            ),
           ),
         ),
-        const PopupMenuItem<ItemMenu>(
+        PopupMenuItem<ItemMenu>(
           value: ItemMenu.about,
           child: ListTile(
-            leading: Icon(Icons.info),
-            title: Text('About'),
+            leading:
+                Icon(Icons.info, color: Theme.of(context).colorScheme.primary),
+            title: Text(
+              'About',
+              style: TextStyle(
+                color: Theme.of(context).colorScheme.primary,
+              ),
+            ),
           ),
         ),
       ],
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
-      color: Colors.white,
+      color: Theme.of(context).colorScheme.secondary,
       elevation: 0,
       offset: const Offset(0, 50),
     );

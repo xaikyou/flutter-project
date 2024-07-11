@@ -13,10 +13,10 @@ class BottomNavBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return GNav(
       mainAxisAlignment: MainAxisAlignment.center,
-      color: const Color.fromARGB(255, 175, 143, 111),
-      activeColor: const Color.fromARGB(255, 116, 81, 45),
-      tabActiveBorder:
-          Border.all(color: const Color.fromARGB(255, 116, 81, 45), width: 3),
+      color: Theme.of(context).colorScheme.onPrimary,
+      activeColor: Theme.of(context).colorScheme.onSecondary,
+      tabActiveBorder: Border.all(
+          color: Theme.of(context).colorScheme.onSecondary, width: 3),
       tabBackgroundColor: Colors.transparent,
       tabBorderRadius: 15,
       onTabChange: (value) => onTabChange!(value),

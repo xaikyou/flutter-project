@@ -28,27 +28,38 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 248, 244, 225),
+      backgroundColor: Theme.of(context).colorScheme.surface,
       appBar: AppBar(
         // keep color of appbar same when scrolling down
         scrolledUnderElevation: 0,
         backgroundColor: Colors.transparent,
+        iconTheme: IconThemeData(color: Theme.of(context).colorScheme.primary),
         elevation: 0,
-        title: const Text(
+        title: Text(
           "Coffee On Road",
-          style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+          style: TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+              color: Theme.of(context).colorScheme.primary),
         ),
         actions: [
-          IconButton(onPressed: () {}, icon: const PopUpMenu()),
+          IconButton(
+            onPressed: () {},
+            icon: const PopUpMenu(),
+          ),
         ],
       ),
-      drawer: const Drawer(
+      drawer: Drawer(
         child: Center(
             child: Padding(
-          padding: EdgeInsets.all(15.0),
+          padding: const EdgeInsets.all(15.0),
           child: Text(
             'Wish you a lucky day with Flutter.\nFrom 10/7/2024',
-            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            style: TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+              color: Theme.of(context).colorScheme.primary,
+            ),
           ),
         )),
       ),

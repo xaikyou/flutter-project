@@ -40,14 +40,14 @@ class _ShopPageState extends State<ShopPage> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const SafeArea(
+                SafeArea(
                   child: Padding(
-                    padding: EdgeInsets.all(5.0),
+                    padding: const EdgeInsets.all(5.0),
                     child: Center(
                       child: Text(
                         '"Your coffee choice make your day."',
                         style: TextStyle(
-                          color: Color.fromARGB(255, 116, 81, 45),
+                          color: Theme.of(context).colorScheme.onSurface,
                           fontSize: 17,
                           fontWeight: FontWeight.bold,
                         ),
@@ -55,14 +55,15 @@ class _ShopPageState extends State<ShopPage> {
                     ),
                   ),
                 ),
-                const SafeArea(
+                SafeArea(
                   child: Padding(
-                    padding: EdgeInsets.all(15.0),
+                    padding: const EdgeInsets.all(15.0),
                     child: Text(
                       'Coffees:',
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 20,
+                        color: Theme.of(context).colorScheme.primary,
                       ),
                     ),
                   ),
@@ -81,7 +82,7 @@ class _ShopPageState extends State<ShopPage> {
                     },
                   ),
                 ),
-                const SafeArea(
+                SafeArea(
                   child: Padding(
                     padding: EdgeInsets.all(15.0),
                     child: Text(
@@ -89,6 +90,7 @@ class _ShopPageState extends State<ShopPage> {
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 20,
+                        color: Theme.of(context).colorScheme.primary,
                       ),
                     ),
                   ),
@@ -107,7 +109,7 @@ class _ShopPageState extends State<ShopPage> {
                     },
                   ),
                 ),
-                const SafeArea(
+                SafeArea(
                   child: Padding(
                     padding: EdgeInsets.all(15.0),
                     child: Text(
@@ -115,6 +117,7 @@ class _ShopPageState extends State<ShopPage> {
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 20,
+                        color: Theme.of(context).colorScheme.primary,
                       ),
                     ),
                   ),

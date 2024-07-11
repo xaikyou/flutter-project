@@ -58,9 +58,10 @@ class _CartPageState extends State<CartPage> {
                 padding: const EdgeInsets.all(15.0),
                 child: Text(
                   'Your Cart: ${value.getUserCart().length} items',
-                  style: const TextStyle(
+                  style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 20,
+                    color: Theme.of(context).colorScheme.primary,
                   ),
                 ),
               ),
