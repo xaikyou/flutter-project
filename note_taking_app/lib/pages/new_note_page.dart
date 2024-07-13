@@ -15,6 +15,7 @@ class _NewNotePageState extends State<NewNotePage> {
   late TextEditingController titleController = TextEditingController();
   late TextEditingController contentController = TextEditingController();
   String color = "NA";
+  bool isTitleFocused = false;
 
   @override
   void initState() {
@@ -26,16 +27,21 @@ class _NewNotePageState extends State<NewNotePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Theme.of(context).colorScheme.surface,
       appBar: AppBar(
         scrolledUnderElevation: 0,
         backgroundColor: Colors.transparent,
         title: TextField(
           controller: titleController,
-          decoration: const InputDecoration(
+          decoration: InputDecoration(
             border: InputBorder.none,
             hintText: 'Title',
+            hintStyle: TextStyle(color: Theme.of(context).colorScheme.primary),
           ),
-          style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+          style: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 20,
+              color: Theme.of(context).colorScheme.primary),
         ),
       ),
       body: Column(
@@ -45,12 +51,15 @@ class _NewNotePageState extends State<NewNotePage> {
               controller: contentController,
               maxLines: null, // Allows for unlimited lines
               keyboardType: TextInputType.multiline,
-              decoration: const InputDecoration(
+              decoration: InputDecoration(
                 hintText: 'Write your note here...',
-                contentPadding: EdgeInsets.all(10),
+                hintStyle:
+                    TextStyle(color: Theme.of(context).colorScheme.primary),
+                contentPadding: const EdgeInsets.all(10),
                 border: InputBorder.none,
               ),
-              style: const TextStyle(fontSize: 20),
+              style: TextStyle(
+                  fontSize: 20, color: Theme.of(context).colorScheme.primary),
             ),
           ),
           Padding(
@@ -59,8 +68,15 @@ class _NewNotePageState extends State<NewNotePage> {
               alignment: Alignment.bottomRight,
               child: ElevatedButton(
                 style: ButtonStyle(
-                  elevation: WidgetStateProperty.all<double>(5.0),
-                ),
+                    elevation: WidgetStateProperty.all<double>(5.0),
+                    shadowColor: WidgetStateProperty.all<Color>(
+                        Theme.of(context).colorScheme.primary),
+                    shape: WidgetStateProperty.all(RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                      side: BorderSide(
+                          color: Theme.of(context).colorScheme.primary,
+                          width: 1.0),
+                    ))),
                 onPressed: () {
                   if (widget.note == null) {
                     context.read<NoteDatabase>().addNote(
@@ -71,7 +87,11 @@ class _NewNotePageState extends State<NewNotePage> {
                   }
                   Navigator.pop(context);
                 },
-                child: const Text('Save'),
+                child: Text(
+                  'Save',
+                  style:
+                      TextStyle(color: Theme.of(context).colorScheme.primary),
+                ),
               ),
             ),
           ),

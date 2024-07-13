@@ -48,14 +48,17 @@ class _AllNotesPageState extends State<AllNotesPage> {
     List<Note> currentNotes = noteDatabase.currentNotes;
 
     return Scaffold(
+        backgroundColor: Theme.of(context).colorScheme.surface,
         floatingActionButton: FloatingActionButton(
-            backgroundColor: Colors.white,
+            backgroundColor: Theme.of(context).colorScheme.surface,
             onPressed: createNote,
-            shape: const CircleBorder(),
-            elevation: 5,
-            child: const Icon(
+            shape: CircleBorder(
+                side: BorderSide(
+                    color: Theme.of(context).colorScheme.primary, width: 1)),
+            elevation: 0,
+            child: Icon(
               Icons.edit_note_rounded,
-              color: Colors.black87,
+              color: Theme.of(context).colorScheme.primary,
             )),
         body: ListView.builder(
             itemCount: currentNotes.length,
@@ -64,24 +67,39 @@ class _AllNotesPageState extends State<AllNotesPage> {
               return Container(
                   margin: const EdgeInsets.only(top: 5.0, left: 10, right: 10),
                   padding: const EdgeInsets.all(5),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    color: Colors.white70,
-                  ),
                   child: GestureDetector(
                     onTap: () => updateNote(note),
                     child: PhysicalModel(
-                      color: Colors.white,
+                      color: Theme.of(context).colorScheme.surface,
                       elevation: 5,
-                      shadowColor: Colors.grey.shade300,
+                      shadowColor: Theme.of(context).colorScheme.surface,
                       borderRadius: BorderRadius.circular(5),
                       child: Padding(
                         padding: const EdgeInsets.only(
                             top: 10.0, bottom: 10.0, left: 15.0, right: 15.0),
-                        child: Text(
-                          note.title == "" ? "No title" : note.title,
-                          style: const TextStyle(
-                              fontSize: 15, fontWeight: FontWeight.bold),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              note.title == ""
+                                  ? "No title"
+                                  : note.title.length > 50
+                                      ? '${note.title.substring(0, 50)}...'
+                                      : note.title,
+                              style: TextStyle(
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.bold,
+                                  color: Theme.of(context).colorScheme.primary),
+                            ),
+                            Text(
+                              note.text.length > 100
+                                  ? '${note.text.substring(0, 100)}...'
+                                  : note.text,
+                              style: TextStyle(
+                                  fontSize: 15,
+                                  color: Theme.of(context).colorScheme.primary),
+                            ),
+                          ],
                         ),
                       ),
                     ),
