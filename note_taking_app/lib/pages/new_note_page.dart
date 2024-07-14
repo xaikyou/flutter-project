@@ -14,14 +14,32 @@ class NewNotePage extends StatefulWidget {
 class _NewNotePageState extends State<NewNotePage> {
   late TextEditingController titleController = TextEditingController();
   late TextEditingController contentController = TextEditingController();
-  String color = "default";
+  late TextEditingController colorController = TextEditingController();
   bool isTitleFocused = false;
+  int isSelected = 1;
 
   @override
   void initState() {
     super.initState();
     titleController = TextEditingController(text: widget.note?.title ?? '');
     contentController = TextEditingController(text: widget.note?.text ?? '');
+    colorController =
+        TextEditingController(text: widget.note?.color ?? 'default');
+
+    switch (colorController.text) {
+      case 'red':
+        isSelected = 2;
+        break;
+      case 'orange':
+        isSelected = 3;
+        break;
+      case 'green':
+        isSelected = 4;
+        break;
+      case 'blue':
+        isSelected = 5;
+        break;
+    }
   }
 
   @override
@@ -73,7 +91,8 @@ class _NewNotePageState extends State<NewNotePage> {
                   GestureDetector(
                     onTap: () {
                       setState(() {
-                        color = 'default';
+                        colorController.text = 'default';
+                        isSelected = 1;
                       });
                     },
                     child: Container(
@@ -85,9 +104,21 @@ class _NewNotePageState extends State<NewNotePage> {
                           width: 2.0,
                         ),
                       ),
-                      child: CircleAvatar(
-                        backgroundColor: Theme.of(context).colorScheme.surface,
-                        radius: 15,
+                      child: Stack(
+                        alignment: Alignment.center,
+                        children: [
+                          CircleAvatar(
+                            backgroundColor:
+                                Theme.of(context).colorScheme.surface,
+                            radius: 15,
+                          ),
+                          if (isSelected == 1)
+                            Icon(
+                              Icons.check,
+                              color: Theme.of(context).colorScheme.primary,
+                              size: 18,
+                            ),
+                        ],
                       ),
                     ),
                   ),
@@ -96,7 +127,8 @@ class _NewNotePageState extends State<NewNotePage> {
                   GestureDetector(
                     onTap: () {
                       setState(() {
-                        color = 'red';
+                        colorController.text = 'red';
+                        isSelected = 2;
                       });
                     },
                     child: Container(
@@ -108,9 +140,20 @@ class _NewNotePageState extends State<NewNotePage> {
                           width: 2.0,
                         ),
                       ),
-                      child: const CircleAvatar(
-                        backgroundColor: Colors.redAccent,
-                        radius: 15,
+                      child: Stack(
+                        alignment: Alignment.center,
+                        children: [
+                          const CircleAvatar(
+                            backgroundColor: Colors.redAccent,
+                            radius: 15,
+                          ),
+                          if (isSelected == 2)
+                            Icon(
+                              Icons.check,
+                              color: Theme.of(context).colorScheme.primary,
+                              size: 18,
+                            ),
+                        ],
                       ),
                     ),
                   ),
@@ -119,7 +162,8 @@ class _NewNotePageState extends State<NewNotePage> {
                   GestureDetector(
                     onTap: () {
                       setState(() {
-                        color = 'orange';
+                        colorController.text = 'orange';
+                        isSelected = 3;
                       });
                     },
                     child: Container(
@@ -131,9 +175,20 @@ class _NewNotePageState extends State<NewNotePage> {
                           width: 2.0,
                         ),
                       ),
-                      child: const CircleAvatar(
-                        backgroundColor: Colors.orangeAccent,
-                        radius: 15,
+                      child: Stack(
+                        alignment: Alignment.center,
+                        children: [
+                          const CircleAvatar(
+                            backgroundColor: Colors.orangeAccent,
+                            radius: 15,
+                          ),
+                          if (isSelected == 3)
+                            Icon(
+                              Icons.check,
+                              color: Theme.of(context).colorScheme.primary,
+                              size: 18,
+                            ),
+                        ],
                       ),
                     ),
                   ),
@@ -142,7 +197,8 @@ class _NewNotePageState extends State<NewNotePage> {
                   GestureDetector(
                     onTap: () {
                       setState(() {
-                        color = 'green';
+                        colorController.text = 'green';
+                        isSelected = 4;
                       });
                     },
                     child: Container(
@@ -154,9 +210,20 @@ class _NewNotePageState extends State<NewNotePage> {
                           width: 2.0,
                         ),
                       ),
-                      child: const CircleAvatar(
-                        backgroundColor: Colors.greenAccent,
-                        radius: 15,
+                      child: Stack(
+                        alignment: Alignment.center,
+                        children: [
+                          const CircleAvatar(
+                            backgroundColor: Colors.greenAccent,
+                            radius: 15,
+                          ),
+                          if (isSelected == 4)
+                            Icon(
+                              Icons.check,
+                              color: Theme.of(context).colorScheme.primary,
+                              size: 18,
+                            ),
+                        ],
                       ),
                     ),
                   ),
@@ -165,7 +232,8 @@ class _NewNotePageState extends State<NewNotePage> {
                   GestureDetector(
                     onTap: () {
                       setState(() {
-                        color = 'blue';
+                        colorController.text = 'blue';
+                        isSelected = 5;
                       });
                     },
                     child: Container(
@@ -177,9 +245,20 @@ class _NewNotePageState extends State<NewNotePage> {
                           width: 2.0,
                         ),
                       ),
-                      child: const CircleAvatar(
-                        backgroundColor: Colors.blueAccent,
-                        radius: 15,
+                      child: Stack(
+                        alignment: Alignment.center,
+                        children: [
+                          const CircleAvatar(
+                            backgroundColor: Colors.blueAccent,
+                            radius: 15,
+                          ),
+                          if (isSelected == 5)
+                            Icon(
+                              Icons.check,
+                              color: Theme.of(context).colorScheme.primary,
+                              size: 18,
+                            ),
+                        ],
                       ),
                     ),
                   ),
@@ -200,13 +279,13 @@ class _NewNotePageState extends State<NewNotePage> {
                         context.read<NoteDatabase>().addNote(
                             titleController.text,
                             contentController.text,
-                            color);
+                            colorController.text);
                       } else {
                         context.read<NoteDatabase>().updateNote(
                             widget.note!.id,
                             titleController.text,
                             contentController.text,
-                            color);
+                            colorController.text);
                       }
                       Navigator.pop(context);
                     },
