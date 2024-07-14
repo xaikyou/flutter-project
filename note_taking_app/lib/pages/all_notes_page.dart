@@ -52,6 +52,7 @@ class _AllNotesPageState extends State<AllNotesPage> {
                 TextButton(
                     onPressed: () {
                       context.read<NoteDatabase>().deleteNote(id);
+                      Navigator.of(context).pop();
                     },
                     child: Text(
                       'Yes',
@@ -109,12 +110,13 @@ class _AllNotesPageState extends State<AllNotesPage> {
                   SlidableAction(
                     onPressed: (context) => deleteNode(note.id),
                     icon: Icons.delete,
+                    foregroundColor: Theme.of(context).colorScheme.surface,
                     backgroundColor: Theme.of(context).colorScheme.primary,
                     borderRadius: BorderRadius.circular(5),
                   ),
                 ],
               ),
-              child: Container(
+              child: SizedBox(
                 width: double.infinity,
                 child: GestureDetector(
                   onTap: () => updateNote(note),
@@ -167,7 +169,6 @@ class _AllNotesPageState extends State<AllNotesPage> {
                     ),
                   ),
                 ),
-                // ),
               ),
             ),
           );

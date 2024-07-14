@@ -7,16 +7,16 @@ class PopUpMenu extends StatefulWidget {
   State<PopUpMenu> createState() => _PopUpMenuState();
 }
 
-enum ItemMenu { edit, view }
+enum ItemMenu { settings }
 
 class _PopUpMenuState extends State<PopUpMenu> {
   ItemMenu? selectedMenu;
 
   void navigateToPage(ItemMenu item) {
     switch (item) {
-      case ItemMenu.edit:
+      case ItemMenu.settings:
         break;
-      case ItemMenu.view:
+      default:
         break;
     }
   }
@@ -34,19 +34,7 @@ class _PopUpMenuState extends State<PopUpMenu> {
       },
       itemBuilder: (BuildContext context) => <PopupMenuEntry<ItemMenu>>[
         PopupMenuItem<ItemMenu>(
-            value: ItemMenu.edit,
-            child: Text(
-              'Edit',
-              style: TextStyle(color: Theme.of(context).colorScheme.primary),
-            )),
-        PopupMenuItem<ItemMenu>(
-            value: ItemMenu.view,
-            child: Text(
-              'View',
-              style: TextStyle(color: Theme.of(context).colorScheme.primary),
-            )),
-        PopupMenuItem<ItemMenu>(
-            value: ItemMenu.view,
+            value: ItemMenu.settings,
             onTap: () {
               Navigator.pushNamed(context, '/settingspage');
             },

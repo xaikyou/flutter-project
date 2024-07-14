@@ -123,7 +123,7 @@ class _NewNotePageState extends State<NewNotePage> {
                     ),
                   ),
 
-                  // Color 2
+                  // Color 2 - red
                   GestureDetector(
                     onTap: () {
                       setState(() {
@@ -158,7 +158,7 @@ class _NewNotePageState extends State<NewNotePage> {
                     ),
                   ),
 
-                  // Color 3
+                  // Color 3 - orange
                   GestureDetector(
                     onTap: () {
                       setState(() {
@@ -193,7 +193,7 @@ class _NewNotePageState extends State<NewNotePage> {
                     ),
                   ),
 
-                  // Color 4
+                  // Color 4 - green
                   GestureDetector(
                     onTap: () {
                       setState(() {
@@ -228,7 +228,7 @@ class _NewNotePageState extends State<NewNotePage> {
                     ),
                   ),
 
-                  // Color 5
+                  // Color 5 - blue
                   GestureDetector(
                     onTap: () {
                       setState(() {

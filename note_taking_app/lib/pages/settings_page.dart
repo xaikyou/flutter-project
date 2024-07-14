@@ -24,10 +24,10 @@ class SettingsPage extends StatelessWidget {
         body: Container(
           decoration: BoxDecoration(
             color: Colors.white70,
-            borderRadius: BorderRadius.circular(15.0),
+            borderRadius: BorderRadius.circular(5.0),
           ),
           margin: const EdgeInsets.only(top: 15, left: 15, right: 15),
-          padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 30),
+          padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [

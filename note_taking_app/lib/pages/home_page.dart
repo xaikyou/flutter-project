@@ -26,10 +26,10 @@ class _HomePageState extends State<HomePage> {
               color: Theme.of(context).colorScheme.primary),
         ),
         actions: [
-          IconButton(
-              onPressed: () {},
-              icon: Icon(Icons.search,
-                  color: Theme.of(context).colorScheme.primary)),
+          // IconButton(
+          //     onPressed: () {},
+          //     icon: Icon(Icons.search,
+          //         color: Theme.of(context).colorScheme.primary)),
           IconButton(onPressed: () {}, icon: const PopUpMenu()),
         ],
       ),
