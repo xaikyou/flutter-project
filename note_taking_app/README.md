@@ -1,16 +1,4 @@
 # note_taking_app
-
-A new Flutter project.
-
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Notes Page                 | New Note Page             |  Delete Note Feature      |  Dark Mode On (1)         |  Dark Mode On (2)        
+:-------------------------:|:-------------------------:|:-------------------------:|:-------------------------:|:-------------------------:
+![](./images/image1.png)   | ![](./images/image2.png)  | ![](./images/image3.png)  | ![](./images/image4.png)  | ![](./images/image5.png) 
