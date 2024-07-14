@@ -14,7 +14,7 @@ class NewNotePage extends StatefulWidget {
 class _NewNotePageState extends State<NewNotePage> {
   late TextEditingController titleController = TextEditingController();
   late TextEditingController contentController = TextEditingController();
-  String color = "NA";
+  String color = "default";
   bool isTitleFocused = false;
 
   @override
@@ -66,32 +66,157 @@ class _NewNotePageState extends State<NewNotePage> {
             padding: const EdgeInsets.all(10.0),
             child: Align(
               alignment: Alignment.bottomRight,
-              child: ElevatedButton(
-                style: ButtonStyle(
-                    elevation: WidgetStateProperty.all<double>(5.0),
-                    shadowColor: WidgetStateProperty.all<Color>(
-                        Theme.of(context).colorScheme.primary),
-                    shape: WidgetStateProperty.all(RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
-                      side: BorderSide(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  // Color 1 - Default Color
+                  GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        color = 'default';
+                      });
+                    },
+                    child: Container(
+                      margin: const EdgeInsets.only(right: 8),
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        border: Border.all(
                           color: Theme.of(context).colorScheme.primary,
-                          width: 1.0),
-                    ))),
-                onPressed: () {
-                  if (widget.note == null) {
-                    context.read<NoteDatabase>().addNote(
-                        titleController.text, contentController.text, color);
-                  } else {
-                    context.read<NoteDatabase>().updateNote(widget.note!.id,
-                        titleController.text, contentController.text, color);
-                  }
-                  Navigator.pop(context);
-                },
-                child: Text(
-                  'Save',
-                  style:
-                      TextStyle(color: Theme.of(context).colorScheme.primary),
-                ),
+                          width: 2.0,
+                        ),
+                      ),
+                      child: CircleAvatar(
+                        backgroundColor: Theme.of(context).colorScheme.surface,
+                        radius: 15,
+                      ),
+                    ),
+                  ),
+
+                  // Color 2
+                  GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        color = 'red';
+                      });
+                    },
+                    child: Container(
+                      margin: const EdgeInsets.only(right: 8),
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        border: Border.all(
+                          color: Theme.of(context).colorScheme.primary,
+                          width: 2.0,
+                        ),
+                      ),
+                      child: const CircleAvatar(
+                        backgroundColor: Colors.redAccent,
+                        radius: 15,
+                      ),
+                    ),
+                  ),
+
+                  // Color 3
+                  GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        color = 'orange';
+                      });
+                    },
+                    child: Container(
+                      margin: const EdgeInsets.only(right: 8),
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        border: Border.all(
+                          color: Theme.of(context).colorScheme.primary,
+                          width: 2.0,
+                        ),
+                      ),
+                      child: const CircleAvatar(
+                        backgroundColor: Colors.orangeAccent,
+                        radius: 15,
+                      ),
+                    ),
+                  ),
+
+                  // Color 4
+                  GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        color = 'green';
+                      });
+                    },
+                    child: Container(
+                      margin: const EdgeInsets.only(right: 8),
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        border: Border.all(
+                          color: Theme.of(context).colorScheme.primary,
+                          width: 2.0,
+                        ),
+                      ),
+                      child: const CircleAvatar(
+                        backgroundColor: Colors.greenAccent,
+                        radius: 15,
+                      ),
+                    ),
+                  ),
+
+                  // Color 5
+                  GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        color = 'blue';
+                      });
+                    },
+                    child: Container(
+                      margin: const EdgeInsets.only(right: 8),
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        border: Border.all(
+                          color: Theme.of(context).colorScheme.primary,
+                          width: 2.0,
+                        ),
+                      ),
+                      child: const CircleAvatar(
+                        backgroundColor: Colors.blueAccent,
+                        radius: 15,
+                      ),
+                    ),
+                  ),
+                  const Spacer(),
+                  ElevatedButton(
+                    style: ButtonStyle(
+                        elevation: WidgetStateProperty.all<double>(5.0),
+                        shadowColor: WidgetStateProperty.all<Color>(
+                            Theme.of(context).colorScheme.primary),
+                        shape: WidgetStateProperty.all(RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                          side: BorderSide(
+                              color: Theme.of(context).colorScheme.primary,
+                              width: 1.0),
+                        ))),
+                    onPressed: () {
+                      if (widget.note == null) {
+                        context.read<NoteDatabase>().addNote(
+                            titleController.text,
+                            contentController.text,
+                            color);
+                      } else {
+                        context.read<NoteDatabase>().updateNote(
+                            widget.note!.id,
+                            titleController.text,
+                            contentController.text,
+                            color);
+                      }
+                      Navigator.pop(context);
+                    },
+                    child: Text(
+                      'Save',
+                      style: TextStyle(
+                          color: Theme.of(context).colorScheme.primary),
+                    ),
+                  ),
+                ],
               ),
             ),
           ),

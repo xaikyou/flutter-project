@@ -70,7 +70,15 @@ class _AllNotesPageState extends State<AllNotesPage> {
                   child: GestureDetector(
                     onTap: () => updateNote(note),
                     child: PhysicalModel(
-                      color: Theme.of(context).colorScheme.surface,
+                      color: note.color == 'default'
+                          ? Theme.of(context).colorScheme.surface
+                          : note.color == 'red'
+                              ? Colors.redAccent
+                              : note.color == 'orange'
+                                  ? Colors.orangeAccent
+                                  : note.color == 'green'
+                                      ? Colors.greenAccent
+                                      : Colors.blueAccent,
                       elevation: 5,
                       shadowColor: Theme.of(context).colorScheme.surface,
                       borderRadius: BorderRadius.circular(5),
