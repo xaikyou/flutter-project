@@ -15,7 +15,7 @@ class _WeatherPageState extends State<WeatherPage> {
   final _weatherService = WeatherService('27c472aed2837389d80bf18841ec60e8');
   Weather? _weather;
 
-  _fetchWeather() async {
+  Future<void> _fetchWeather() async {
     String cityName = await _weatherService.getCurrentCity();
     try {
       final weather = await _weatherService.getWeather(cityName);
@@ -23,7 +23,18 @@ class _WeatherPageState extends State<WeatherPage> {
         _weather = weather;
       });
     } catch (e) {
-      throw Exception('Faild to find the city');
+      throw Exception('Error fetching weather: $e');
+    }
+  }
+
+  Future<void> _fetchWeatherForCity(String cityName) async {
+    try {
+      final weather = await _weatherService.getWeather(cityName);
+      setState(() {
+        _weather = weather;
+      });
+    } catch (e) {
+      throw Exception('Error fetching weather for $cityName: $e');
     }
   }
 
@@ -50,7 +61,9 @@ class _WeatherPageState extends State<WeatherPage> {
                   decoration: InputDecoration(
                     focusColor: Colors.white,
                     prefixIcon: GestureDetector(
-                      onTap: () {},
+                      onTap: () => {
+                        _fetchWeatherForCity(textController.text),
+                      },
                       child: const Icon(
                         Icons.search,
                         color: Colors.black,
@@ -72,30 +85,35 @@ class _WeatherPageState extends State<WeatherPage> {
                 ),
               ),
             ),
+            _weather != null
+                ? Column(
+                    children: [
+                      // City's Name
+                      Text(
+                        _weather?.cityName ?? 'Loading city...',
+                        style: const TextStyle(fontSize: 20),
+                      ),
 
-            // City's Name
-            Text(
-              _weather?.cityName ?? 'Loading city...',
-              style: const TextStyle(fontSize: 20),
-            ),
+                      // Image
+                      SafeArea(
+                        child: Image.network(
+                            'http://openweathermap.org/img/wn/${_weather?.icon ?? "01d"}.png'),
+                      ),
 
-            // Image
-            SafeArea(
-              child: Image.network(
-                  'http://openweathermap.org/img/wn/${_weather?.icon ?? "01d"}.png'),
-            ),
+                      // Main Condition
+                      Text(
+                        _weather!.mainCondition,
+                        style: const TextStyle(fontSize: 20),
+                      ),
 
-            // Temperature
-            Text(
-              '${_weather?.temperature.round()}°C',
-              style: const TextStyle(fontSize: 20),
-            ),
-
-            // Main Condition
-            Text(
-              '${_weather?.temperature.round()}°C',
-              style: const TextStyle(fontSize: 20),
-            )
+                      // Temperature
+                      Text(
+                        '${_weather?.temperature.round()}°C',
+                        style: const TextStyle(fontSize: 20),
+                      ),
+                    ],
+                  )
+                : const Text('No weather data'),
           ],
         ),
       ),
