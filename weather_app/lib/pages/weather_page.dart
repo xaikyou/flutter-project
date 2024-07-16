@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:weather_app/models/weather_model.dart';
 import 'package:weather_app/services/weather_service.dart';
@@ -16,7 +18,16 @@ class _WeatherPageState extends State<WeatherPage> {
   Weather? _weather;
 
   Future<void> _fetchWeather() async {
-    String cityName = await _weatherService.getCurrentCity();
+    String cityName;
+
+    try {
+      cityName = await _weatherService
+          .getCurrentCity()
+          .timeout(const Duration(seconds: 10));
+    } catch (_) {
+      cityName = 'England';
+    }
+
     try {
       final weather = await _weatherService.getWeather(cityName);
       setState(() {
@@ -42,6 +53,10 @@ class _WeatherPageState extends State<WeatherPage> {
   void initState() {
     super.initState();
     _fetchWeather();
+
+    Timer.periodic(const Duration(milliseconds: 1), (Timer t) {
+      setState(() {});
+    });
   }
 
   @override
@@ -57,6 +72,9 @@ class _WeatherPageState extends State<WeatherPage> {
                 child: TextFormField(
                   controller: textController,
                   textInputAction: TextInputAction.go,
+                  onFieldSubmitted: (value) {
+                    _fetchWeatherForCity(textController.text);
+                  },
                   maxLength: null,
                   decoration: InputDecoration(
                     focusColor: Colors.white,
@@ -94,10 +112,18 @@ class _WeatherPageState extends State<WeatherPage> {
                         style: const TextStyle(fontSize: 20),
                       ),
 
+                      // City's Time
+                      Text(
+                        '${DateTime.now().add(Duration(seconds: int.parse(_weather!.timezone) - DateTime.now().timeZoneOffset.inSeconds))}'
+                            .split('.')[0], // Remove milliseconds
+                        style: const TextStyle(fontSize: 20),
+                      ),
+
                       // Image
                       SafeArea(
                         child: Image.network(
-                            'http://openweathermap.org/img/wn/${_weather?.icon ?? "01d"}.png'),
+                          'http://openweathermap.org/img/wn/${_weather?.icon ?? "01d"}.png',
+                        ),
                       ),
 
                       // Main Condition
