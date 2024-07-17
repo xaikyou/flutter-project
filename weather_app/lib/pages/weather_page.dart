@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:weather_app/models/weather_model.dart';
+import 'package:weather_app/pages/forecast_page.dart';
 import 'package:weather_app/services/weather_service.dart';
 
 class WeatherPage extends StatefulWidget {
@@ -49,11 +50,28 @@ class _WeatherPageState extends State<WeatherPage> {
     }
   }
 
+  Map<String, dynamic>? _forecastInfo;
+
+  Future<void> _fetchForecastForCity(String lat, String lon) async {
+    try {
+      final forecast = await _weatherService.getForecastFor5Days(lat, lon);
+      setState(() {
+        _forecastInfo = forecast;
+      });
+    } catch (e) {
+      throw Exception('Error fetching 3-day forecast: $e');
+    }
+  }
+
   @override
   void initState() {
     super.initState();
-    _fetchWeather();
-
+    _fetchWeather().then((_) {
+      if (_weather != null) {
+        _fetchForecastForCity(
+            _weather!.coord.lat.toString(), _weather!.coord.lon.toString());
+      }
+    });
     Timer.periodic(const Duration(milliseconds: 1), (Timer t) {
       setState(() {});
     });
@@ -69,37 +87,50 @@ class _WeatherPageState extends State<WeatherPage> {
             SafeArea(
               child: Padding(
                 padding: const EdgeInsets.all(10.0),
-                child: TextFormField(
-                  controller: textController,
-                  textInputAction: TextInputAction.go,
-                  onFieldSubmitted: (value) {
-                    _fetchWeatherForCity(textController.text);
+                child: GestureDetector(
+                  onTap: () {
+                    FocusScope.of(context).requestFocus(FocusNode());
                   },
-                  maxLength: null,
-                  decoration: InputDecoration(
-                    focusColor: Colors.white,
-                    prefixIcon: GestureDetector(
-                      onTap: () => {
-                        _fetchWeatherForCity(textController.text),
-                      },
-                      child: const Icon(
-                        Icons.search,
-                        color: Colors.black,
+                  child: TextFormField(
+                    controller: textController,
+                    textInputAction: TextInputAction.go,
+                    onFieldSubmitted: (value) {
+                      _fetchWeatherForCity(textController.text);
+                      _fetchForecastForCity(
+                        _weather!.coord.lat.toString(),
+                        _weather!.coord.lon.toString(),
+                      );
+                    },
+                    maxLength: null,
+                    decoration: InputDecoration(
+                      focusColor: Colors.white,
+                      prefixIcon: GestureDetector(
+                        onTap: () => {
+                          _fetchWeatherForCity(textController.text),
+                          _fetchForecastForCity(
+                            _weather!.coord.lat.toString(),
+                            _weather!.coord.lon.toString(),
+                          ),
+                        },
+                        child: const Icon(
+                          Icons.search,
+                          color: Colors.black,
+                        ),
                       ),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                        borderSide:
+                            const BorderSide(color: Colors.black, width: 1.0),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                        borderSide: const BorderSide(
+                            color: Colors.blueAccent, width: 2.0),
+                      ),
+                      hintText: "Weather in your city",
                     ),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10.0),
-                      borderSide:
-                          const BorderSide(color: Colors.black, width: 1.0),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10.0),
-                      borderSide: const BorderSide(
-                          color: Colors.blueAccent, width: 2.0),
-                    ),
-                    hintText: "Weather in your city",
+                    style: const TextStyle(fontSize: 20),
                   ),
-                  style: const TextStyle(fontSize: 20),
                 ),
               ),
             ),
@@ -137,6 +168,41 @@ class _WeatherPageState extends State<WeatherPage> {
                         '${_weather?.temperature.round()}°C',
                         style: const TextStyle(fontSize: 20),
                       ),
+
+                      // See More
+                      Padding(
+                        padding: const EdgeInsets.only(top: 10.0),
+                        child: ElevatedButton(
+                            style: ButtonStyle(
+                                backgroundColor:
+                                    WidgetStateProperty.resolveWith<Color>(
+                                        (states) {
+                                  if (states.contains(WidgetState.pressed)) {
+                                    return Colors.black; // Color when pressed
+                                  } else {
+                                    return Colors
+                                        .grey.shade800; // Default color
+                                  }
+                                }),
+                                elevation: WidgetStateProperty.all<double>(0.0),
+                                shape: WidgetStateProperty.all(
+                                    RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(5),
+                                  side: const BorderSide(
+                                      color: Colors.black, width: 1.0),
+                                ))),
+                            onPressed: () {
+                              showModalBottomSheet(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return ForecastPage(
+                                      forecastInfo: _forecastInfo,
+                                    );
+                                  });
+                            },
+                            child: const Text('See more',
+                                style: TextStyle(color: Colors.white))),
+                      )
                     ],
                   )
                 : const Text('No weather data'),
