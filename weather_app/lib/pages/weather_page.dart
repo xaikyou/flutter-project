@@ -125,7 +125,7 @@ class _WeatherPageState extends State<WeatherPage> {
                       focusedBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10.0),
                         borderSide: const BorderSide(
-                            color: Colors.blueAccent, width: 2.0),
+                            color: Colors.blueGrey, width: 2.0),
                       ),
                       hintText: "Weather in your city",
                     ),
