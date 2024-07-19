@@ -1,5 +1,7 @@
-import 'package:cubit_login/presentation/widgets/button_widget.dart';
+import 'package:cubit_login/presentation/widgets/text_button_widget.dart';
+import 'package:cubit_login/presentation/widgets/icon_button_widget.dart';
 import 'package:cubit_login/presentation/widgets/text_field_widget.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class LoginPage extends StatefulWidget {
@@ -12,6 +14,34 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   final usernameController = TextEditingController();
   final passwordController = TextEditingController();
+
+  bool errorSignIn = false;
+
+  void signUserIn() async {
+    // show loading circle
+    showDialog(
+      context: context,
+      builder: (context) {
+        return const Center(
+          child: CircularProgressIndicator(),
+        );
+      },
+    );
+
+    // try sign in
+    try {
+      await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: usernameController.text,
+        password: passwordController.text,
+      );
+    } on FirebaseAuthException catch (_) {
+      setState(() {
+        errorSignIn = true;
+      });
+    }
+    // ignore: use_build_context_synchronously
+    Navigator.pop(context);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -58,39 +88,52 @@ class _LoginPageState extends State<LoginPage> {
                     // username textfield
                     TextFieldWidget(
                       controller: usernameController,
-                      hintText: 'username',
+                      hintText: 'Email address or phone number',
                       obscureText: false,
+                      onSubmitted: signUserIn,
                     ),
 
                     // password textfield
                     TextFieldWidget(
                       controller: passwordController,
-                      hintText: 'password',
+                      hintText: 'Password',
                       obscureText: true,
+                      onSubmitted: () => signUserIn(),
+                    ),
+
+                    // Error message
+                    if (errorSignIn)
+                      Text(
+                        'Email or password did not match.',
+                        style: TextStyle(
+                          color: Colors.red.shade700,
+                          fontWeight: FontWeight.w100,
+                        ),
+                      ),
+                    const SizedBox(height: 20),
+
+                    // login button
+                    TextButtonWidget(
+                      textButton: 'Log in',
+                      beginColor: Colors.blueAccent,
+                      endColor: Colors.blue.shade300,
+                      size: const Size(double.infinity, 50),
+                      onTap: () => signUserIn(),
                     ),
 
                     // forget password button
                     const Align(
-                      alignment: Alignment.topRight,
+                      alignment: Alignment.center,
                       child: TextButton(
                         onPressed: null,
                         child: Text(
-                          'Forget Password?',
+                          'Forgotten password?',
                           style: TextStyle(
                             fontSize: 17,
                             color: Colors.black87,
                           ),
                         ),
                       ),
-                    ),
-                    const SizedBox(height: 20),
-
-                    // login button
-                    ButtonWidget(
-                      textButton: 'Login',
-                      beginColor: Colors.blueAccent,
-                      endColor: Colors.blue.shade300,
-                      size: const Size(double.infinity, 50),
                     ),
                     const SizedBox(height: 50),
 
@@ -118,38 +161,35 @@ class _LoginPageState extends State<LoginPage> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        ButtonWidget(
-                          textButton: 'G',
-                          beginColor: Colors.red.shade300,
-                          endColor: Colors.redAccent.shade700,
-                          size: const Size.square(70),
+                        IconButtonWidget(
+                          iconButton: '../assets/GoogleIcon.png',
+                          size: const Size.square(90),
+                          onTap: () {},
                         ),
-                        ButtonWidget(
-                          textButton: 'F',
-                          beginColor: Colors.blue.shade400,
-                          endColor: Colors.blue.shade900,
-                          size: const Size.square(70),
+                        IconButtonWidget(
+                          iconButton: '../assets/FacebookIcon.png',
+                          size: const Size.square(90),
+                          onTap: () {},
                         ),
-                        const ButtonWidget(
-                          textButton: 'X',
-                          beginColor: Colors.black38,
-                          endColor: Colors.black87,
-                          size: Size.square(70),
+                        IconButtonWidget(
+                          iconButton: '../assets/TwitterIcon.png',
+                          size: const Size.square(90),
+                          onTap: () {},
                         ),
                       ],
                     ),
                     const SizedBox(height: 50),
 
                     // register
-                    const Row(
+                    Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text('Don\'t have an account?\t'),
+                        const Text('Don\'t have an account?\t'),
                         Text(
                           'Register',
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
-                            color: Colors.blueAccent,
+                            color: Colors.blue.shade900,
                           ),
                         )
                       ],

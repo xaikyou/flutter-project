@@ -6,11 +6,13 @@ class TextFieldWidget extends StatelessWidget {
     required this.controller,
     required this.hintText,
     required this.obscureText,
+    required this.onSubmitted,
   });
 
   final TextEditingController controller;
   final String hintText;
   final bool obscureText;
+  final Function()? onSubmitted;
 
   @override
   Widget build(BuildContext context) {
@@ -19,6 +21,8 @@ class TextFieldWidget extends StatelessWidget {
       child: TextField(
         controller: controller,
         obscureText: obscureText,
+        textInputAction: TextInputAction.done,
+        onEditingComplete: onSubmitted,
         decoration: InputDecoration(
           hintText: hintText,
           enabledBorder: const OutlineInputBorder(

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "417643830593",
+    "project_id": "authentication-flutter-90bc7",
+    "storage_bucket": "authentication-flutter-90bc7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:417643830593:android:94014f1eccb108c768d5c0",
+        "android_client_info": {
+          "package_name": "com.example.cubit_login"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCYhHgWJ73m1C0ElfP1bOkiirdJVB1PS84"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
