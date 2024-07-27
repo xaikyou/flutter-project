@@ -1,5 +1,5 @@
-# number_trivia
+# Number Trivia App
 
 <div align="center">
-	<img width = "25%" src="./screenshots/Screenshot.PNG">
+	<img width = "25%" src="./screenshots/Screenshot.png">
 </div>
