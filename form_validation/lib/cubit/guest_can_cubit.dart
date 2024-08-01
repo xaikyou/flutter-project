@@ -9,6 +9,14 @@ class GuestCanCubit extends Cubit<GuestCanState> {
     items[index]['value'] = !items[index]['value'];
     emit(GuestCanState(items));
   }
+
+  void reset() {
+    final items = [...state.checkListItems];
+    for (var item in items) {
+      item['value'] = false;
+    }
+    emit(GuestCanState(items));
+  }
 }
 
 class GuestCanState {

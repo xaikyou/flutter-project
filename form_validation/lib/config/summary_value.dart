@@ -1,0 +1,10 @@
+String title = '';
+late String? category;
+late String? startDate;
+late String? endDate;
+late String? startTime;
+late String? endTime;
+late String? frequency;
+late String? location;
+List<String> guests = [];
+List<String> guestCan = [];

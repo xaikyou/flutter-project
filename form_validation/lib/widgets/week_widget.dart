@@ -6,12 +6,12 @@ class WeekWidget extends StatefulWidget {
   const WeekWidget({
     super.key,
     required this.title,
-    required this.categoryItem,
+    required this.weekItem,
     required this.isEnable,
   });
 
   final String title;
-  final List<String> categoryItem;
+  final List<String> weekItem;
   final bool isEnable;
 
   @override
@@ -19,10 +19,11 @@ class WeekWidget extends StatefulWidget {
 }
 
 class _WeekWidgetState extends State<WeekWidget> {
+  bool _isExpanded = false;
+
   @override
   Widget build(BuildContext context) {
     final weekCubit = BlocProvider.of<WeekCubit>(context);
-    final weekController = ExpansionTileController();
 
     return Card(
       margin: EdgeInsets.zero,
@@ -30,34 +31,57 @@ class _WeekWidgetState extends State<WeekWidget> {
         borderRadius: BorderRadius.circular(5),
         side: const BorderSide(color: Colors.black, width: 1),
       ),
-      child: Theme(
-        data: Theme.of(context).copyWith(dividerColor: Colors.transparent),
-        child: BlocBuilder<WeekCubit, String>(
-          builder: (_, state) {
-            return ExpansionTile(
-              controller: weekController,
-              enabled: widget.isEnable,
-              title: Text(state),
-              backgroundColor: Colors.white,
-              collapsedBackgroundColor: Colors.white,
-              children: [
-                ListView.builder(
-                  shrinkWrap: true,
-                  itemCount: widget.categoryItem.length,
-                  itemBuilder: (_, index) => GestureDetector(
-                    onTap: () {
-                      weekCubit.updateWeek(widget.categoryItem[index]);
-                      weekController.collapse();
-                    },
-                    child: ListTile(
-                      title: Text(widget.categoryItem[index]),
-                    ),
+      child: Column(
+        children: [
+          GestureDetector(
+            onTap: () {
+              if (widget.isEnable) {
+                setState(() {
+                  _isExpanded = !_isExpanded;
+                });
+              }
+            },
+            child: Container(
+              padding: const EdgeInsets.all(16),
+              color: widget.isEnable ? Colors.blueAccent : Colors.grey,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    weekCubit.state,
+                    style: const TextStyle(color: Colors.white, fontSize: 16),
                   ),
-                ),
-              ],
-            );
-          },
-        ),
+                  Icon(
+                    _isExpanded ? Icons.arrow_drop_up : Icons.arrow_drop_down,
+                    color: Colors.white,
+                  ),
+                ],
+              ),
+            ),
+          ),
+          AnimatedContainer(
+            duration: const Duration(milliseconds: 300),
+            height: _isExpanded ? (widget.weekItem.length * 50.0) : 0,
+            child: _isExpanded
+                ? ListView.builder(
+                    padding: EdgeInsets.zero,
+                    itemCount: widget.weekItem.length,
+                    itemBuilder: (_, index) => GestureDetector(
+                      onTap: () {
+                        weekCubit.updateWeek(widget.weekItem[index]);
+                        setState(() {
+                          _isExpanded =
+                              false; // Collapse the container after selection
+                        });
+                      },
+                      child: ListTile(
+                        title: Text(widget.weekItem[index]),
+                      ),
+                    ),
+                  )
+                : null,
+          ),
+        ],
       ),
     );
   }

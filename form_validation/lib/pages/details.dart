@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:form_validation/config/constants.dart';
+import 'package:form_validation/config/summary_value.dart';
 import 'package:form_validation/cubit/category_cubit.dart';
 import 'package:form_validation/widgets/category_widget.dart';
 import 'package:form_validation/widgets/icon_button_widget.dart';
@@ -8,7 +9,7 @@ import 'package:form_validation/widgets/text_form_field_widget.dart';
 import 'package:form_validation/widgets/text_title_widget.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 
-class Details extends StatelessWidget {
+class Details extends StatefulWidget {
   const Details({
     super.key,
     required this.nextButton,
@@ -17,12 +18,17 @@ class Details extends StatelessWidget {
   final Function nextButton;
 
   @override
+  State<Details> createState() => _DetailsState();
+}
+
+class _DetailsState extends State<Details> {
+  @override
   Widget build(BuildContext context) {
     final formKey = GlobalKey<FormState>();
 
     final categoryCubit = BlocProvider.of<CategoryCubit>(context);
 
-    final TextEditingController titleController = TextEditingController();
+    TextEditingController titleController = TextEditingController(text: title);
 
     void validate() {
       if (!formKey.currentState!.validate()) {
@@ -34,8 +40,10 @@ class Details extends StatelessWidget {
         );
         return;
       }
-      categoryCubit.updateCategory(initalTitleCategory);
-      nextButton();
+      title = titleController.text;
+      category = categoryCubit.state;
+      // categoryCubit.updateCategory(initalTitleCategory);
+      widget.nextButton();
     }
 
     String? checkNullTextField(String? value) {

@@ -86,14 +86,15 @@ class _HomePageState extends State<HomePage>
       length: 3,
       child: Scaffold(
         appBar: AppBar(
-          title: _getAppBarTitle(),
+          title: SingleChildScrollView(
+              scrollDirection: Axis.horizontal, child: _getAppBarTitle()),
           scrolledUnderElevation: 0,
           toolbarHeight: 80,
           backgroundColor: Colors.white,
           bottom: PreferredSize(
             preferredSize: const Size.fromHeight(kToolbarHeight),
             child: IgnorePointer(
-              ignoring: false,
+              ignoring: true,
               child: TabBar(
                 controller: _tabController,
                 isScrollable: true,

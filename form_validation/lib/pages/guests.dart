@@ -2,7 +2,11 @@ import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:form_validation/config/constants.dart';
+import 'package:form_validation/config/summary_value.dart';
 import 'package:form_validation/cubit/guest_can_cubit.dart';
+import 'package:form_validation/cubit/guest_cubit.dart';
+import 'package:form_validation/pages/summary.dart';
+import 'package:form_validation/widgets/display_bubble_widget.dart';
 import 'package:form_validation/widgets/icon_button_widget.dart';
 import 'package:form_validation/widgets/text_button_widget.dart';
 import 'package:form_validation/widgets/text_form_field_widget.dart';
@@ -21,6 +25,7 @@ class Guests extends StatelessWidget {
   Widget build(BuildContext context) {
     final emailController = TextEditingController();
     final formKey = GlobalKey<FormState>();
+    final guestCubit = BlocProvider.of<GuestCubit>(context);
     final guestCanCubit = BlocProvider.of<GuestCanCubit>(context);
 
     bool isEmail(String? input) => EmailValidator.validate(input!);
@@ -43,13 +48,9 @@ class Guests extends StatelessWidget {
       if (!formKey.currentState!.validate()) {
         return;
       }
-    }
-
-    String? checkNullTextField(String? value) {
-      if (value == null || value.isEmpty) {
-        return 'Please enter some text';
-      }
-      return null;
+      guests.add(emailController.text);
+      guestCubit.update(guests);
+      emailController.clear();
     }
 
     return Scaffold(
@@ -77,13 +78,29 @@ class Guests extends StatelessWidget {
                       const SizedBox(width: 10),
                       TextButtonWidget(
                         textButton: 'Invite',
-                        color: Colors.grey,
+                        color: Colors.blue,
                         size: Size.zero,
                         onPressed: () => invite(),
                       )
                     ],
                   ),
                   const SizedBox(height: 15),
+                  Column(
+                    children: [
+                      BlocBuilder<GuestCubit, GuestState>(
+                        builder: (_, state) {
+                          if (state is GuestUpdated) {
+                            return DisplayBubbleWidget(
+                              items: state.guests,
+                              maxVisibleItems: 5,
+                            );
+                          }
+                          return Container();
+                        },
+                      ),
+                      const SizedBox(height: 15),
+                    ],
+                  ),
 
                   // Guests can
                   textTitleWidget('Guests can'),
@@ -95,6 +112,7 @@ class Guests extends StatelessWidget {
                           guestCanList.length,
                           (index) => CheckboxListTile(
                             contentPadding: EdgeInsets.zero,
+                            activeColor: Colors.blue,
                             overlayColor:
                                 WidgetStateProperty.all<Color>(Colors.white),
                             dense: true,
@@ -130,7 +148,13 @@ class Guests extends StatelessWidget {
                         textButton: 'Submit',
                         color: Colors.blue,
                         size: Size.zero,
-                        onPressed: () => backFunc(),
+                        onPressed: () {
+                          guestCan = guestCanCubit.state.checkListItems
+                              .where((item) => item['value'] == true)
+                              .map((item) => item['title'] as String)
+                              .toList();
+                          summary(context);
+                        },
                       )
                     ],
                   ),

@@ -3,10 +3,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:form_validation/config/constants.dart';
 import 'package:form_validation/cubit/category_cubit.dart';
 import 'package:form_validation/cubit/date_cubit.dart';
+import 'package:form_validation/cubit/date_to_cubit.dart';
 import 'package:form_validation/cubit/end_time_cubit.dart';
 import 'package:form_validation/cubit/frequency_check_list_cubit.dart';
 import 'package:form_validation/cubit/guest_can_cubit.dart';
+import 'package:form_validation/cubit/guest_cubit.dart';
 import 'package:form_validation/cubit/location_check_list_cubit.dart';
+import 'package:form_validation/cubit/num_week_cubit.dart';
 import 'package:form_validation/cubit/start_time_cubit.dart';
 import 'package:form_validation/cubit/week_cubit.dart';
 import 'package:form_validation/pages/home_page.dart';
@@ -25,6 +28,7 @@ class MainApp extends StatelessWidget {
       providers: [
         BlocProvider(create: (context) => CategoryCubit()),
         BlocProvider(create: (context) => DateCubit()),
+        BlocProvider(create: (context) => DateToCubit()),
         BlocProvider(create: (context) => StartTimeCubit()),
         BlocProvider(create: (context) => EndTimeCubit()),
         BlocProvider(
@@ -33,6 +37,7 @@ class MainApp extends StatelessWidget {
           ),
         ),
         BlocProvider(create: (context) => WeekCubit()),
+        BlocProvider(create: (context) => NumWeekCubit()),
         BlocProvider(
           create: (context) => LocationCheckListCubit(
             [...checkListLocationItems],
@@ -43,6 +48,7 @@ class MainApp extends StatelessWidget {
             [...guestCanList],
           ),
         ),
+        BlocProvider(create: (context) => GuestCubit()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
