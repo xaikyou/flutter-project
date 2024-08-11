@@ -1,0 +1,50 @@
+name: pokedex
+description: "A new Flutter project."
+publish_to: 'none'
+version: 0.1.0
+
+environment:
+  sdk: '>=3.4.3 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  # Support UI
+  google_fonts:
+
+  # Service locator
+  get_it: 
+  
+  # Bloc for state management
+  flutter_bloc: 
+  bloc: 
+  
+  # Value equality
+  equatable: 
+  
+  # Remote API
+  dio:
+  retrofit:
+  http:
+  
+  # Freezed
+  freezed_annotation: 
+  json_annotation: 
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^3.0.0
+
+  # Code generator
+  build_runner:
+  retrofit_generator:
+
+  # Mock test
+  mocktail:
+  # Freezed
+  freezed: 
+  json_serializable: 
+
+flutter:
+  uses-material-design: true
