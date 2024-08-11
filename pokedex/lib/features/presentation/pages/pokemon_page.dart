@@ -18,7 +18,7 @@ class PokemonPage extends StatelessWidget {
               controller: searchTextController,
             ),
           ),
-          const PokemonListWidget(),
+          PokemonListWidget(),
         ],
       ),
     );

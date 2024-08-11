@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
-import 'package:pokedex/features/data/models/pokedex/pokedex.dart';
+import 'package:pokedex/features/data/models/pokedex.dart';
 
 abstract class PokedexState extends Equatable {
   final Pokedex? pokedex;

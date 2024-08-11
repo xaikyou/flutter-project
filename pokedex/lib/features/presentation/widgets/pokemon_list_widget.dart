@@ -3,6 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pokedex/config/constants.dart';
 import 'package:pokedex/features/presentation/cubit/pokedex/pokedex_cubit.dart';
 import 'package:pokedex/features/presentation/cubit/pokedex/pokedex_state.dart';
+import 'package:pokedex/features/presentation/cubit/pokemon/pokemon_cubit.dart';
+import 'package:pokedex/features/presentation/cubit/pokemon/pokemon_state.dart';
 import '../../../core/utils.dart';
 
 class PokemonListWidget extends StatelessWidget {
@@ -35,7 +37,7 @@ class PokemonListWidget extends StatelessWidget {
                     );
                   }
                   return GridView.builder(
-                    itemCount: pokedexState.pokedex!.results.length,
+                    itemCount: 2, // pokedexState.pokedex!.results.length,
                     gridDelegate:
                         const SliverGridDelegateWithMaxCrossAxisExtent(
                       maxCrossAxisExtent: 200,
@@ -48,9 +50,52 @@ class PokemonListWidget extends StatelessWidget {
                         margin: EdgeInsets.zero,
                         elevation: 3,
                         child: SafeArea(
-                          child: Text(
-                            pokedexState.pokedex!.results[index].name
-                                .capitalize(),
+                          child: BlocBuilder<PokemonCubit, PokemonState>(
+                            builder: (context, pokemonState) {
+                              if (pokemonState is PokemonLoadingState) {
+                                return Center(
+                                  child: CircularProgressIndicator(
+                                    color: Colors.red.shade700,
+                                  ),
+                                );
+                              }
+                              if (pokemonState is PokemonErrorState) {
+                                return Center(
+                                  child: Icon(
+                                    Icons.warning_amber_rounded,
+                                    color: Colors.red.shade700,
+                                  ),
+                                );
+                              }
+                              for (var i = 0; i < 2; i++) {}
+                              return SizedBox(
+                                child: Column(
+                                  children: [
+                                    Align(
+                                      alignment: Alignment.topRight,
+                                      child: Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 10),
+                                        child: Text(
+                                            "#${pokemonState.pokemon!.id}"),
+                                      ),
+                                    ),
+                                    Expanded(
+                                      child: Image.network(
+                                        pokemonState.pokemon!.sprites.other!
+                                            .officialArtwork.frontDefault,
+                                        fit: BoxFit.contain,
+                                      ),
+                                    ),
+                                    Text(
+                                      pokedexState.pokedex!.results[index].name
+                                          .capitalize(),
+                                      textAlign: TextAlign.center,
+                                    ),
+                                  ],
+                                ),
+                              );
+                            },
                           ),
                         ),
                       );
