@@ -6,3 +6,4 @@
 4. Weather App
 5. News App ( learn )
 6. Number Trivia
+7. Form Validation
