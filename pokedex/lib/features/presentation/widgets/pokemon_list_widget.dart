@@ -22,7 +22,7 @@ class _PokemonListWidgetState extends State<PokemonListWidget> {
     super.initState();
     _pokemonCubit = BlocProvider.of<PokemonCubit>(context);
 
-    for (int i = 1; i <= 50; i++) {
+    for (int i = 1; i <= 500; i++) {
       _pokemonCubit.fetchPokemon(i);
     }
   }
@@ -56,7 +56,7 @@ class _PokemonListWidgetState extends State<PokemonListWidget> {
                   return BlocBuilder<PokemonCubit, PokemonState>(
                     builder: (context, pokemonState) {
                       return GridView.builder(
-                        itemCount: 50,
+                        itemCount: 500,
                         gridDelegate:
                             const SliverGridDelegateWithMaxCrossAxisExtent(
                           maxCrossAxisExtent: 200,
@@ -84,7 +84,7 @@ class _PokemonListWidgetState extends State<PokemonListWidget> {
                                     ),
                                     Expanded(
                                       child: Image.network(
-                                        pokemon.sprites.other!.officialArtwork
+                                        pokemon.sprites.other.officialArtwork
                                             .frontDefault,
                                         fit: BoxFit.contain,
                                       ),

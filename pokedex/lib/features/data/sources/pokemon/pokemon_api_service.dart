@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:pokedex/config/constants.dart';
-import 'package:pokedex/features/data/models/pokemon.dart';
+import 'package:pokedex/features/data/models/pokemon/pokemon.dart';
 import 'package:retrofit/http.dart';
 import 'package:retrofit/retrofit.dart';
 

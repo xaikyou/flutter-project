@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:pokedex/core/data_state.dart';
-import 'package:pokedex/features/data/models/pokemon.dart';
+import 'package:pokedex/features/data/models/pokemon/pokemon.dart';
 import 'package:pokedex/features/data/sources/pokemon/pokemon_api_service.dart';
 import 'package:pokedex/features/domain/repositories/pokemon_repository.dart';
 

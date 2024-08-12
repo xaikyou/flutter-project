@@ -1,7 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pokedex/core/data_state.dart';
 import 'package:pokedex/core/usecase.dart';
-import 'package:pokedex/features/data/models/pokemon.dart';
+import 'package:pokedex/features/data/models/pokemon/pokemon.dart';
 import 'package:pokedex/features/domain/usecases/get_pokemon.dart';
 import 'package:pokedex/features/presentation/cubit/pokemon/pokemon_state.dart';
 
