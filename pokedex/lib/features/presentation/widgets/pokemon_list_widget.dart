@@ -7,8 +7,25 @@ import 'package:pokedex/features/presentation/cubit/pokemon/pokemon_cubit.dart';
 import 'package:pokedex/features/presentation/cubit/pokemon/pokemon_state.dart';
 import '../../../core/utils.dart';
 
-class PokemonListWidget extends StatelessWidget {
+class PokemonListWidget extends StatefulWidget {
   const PokemonListWidget({super.key});
+
+  @override
+  State<PokemonListWidget> createState() => _PokemonListWidgetState();
+}
+
+class _PokemonListWidgetState extends State<PokemonListWidget> {
+  late PokemonCubit _pokemonCubit;
+
+  @override
+  void initState() {
+    super.initState();
+    _pokemonCubit = BlocProvider.of<PokemonCubit>(context);
+
+    for (int i = 1; i <= 50; i++) {
+      _pokemonCubit.fetchPokemon(i);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -36,39 +53,25 @@ class PokemonListWidget extends StatelessWidget {
                       child: Icon(Icons.refresh),
                     );
                   }
-                  return GridView.builder(
-                    itemCount: 2, // pokedexState.pokedex!.results.length,
-                    gridDelegate:
-                        const SliverGridDelegateWithMaxCrossAxisExtent(
-                      maxCrossAxisExtent: 200,
-                      mainAxisSpacing: 10,
-                      crossAxisSpacing: 10,
-                    ),
-                    itemBuilder: (context, index) {
-                      return Card(
-                        color: whiteColor,
-                        margin: EdgeInsets.zero,
-                        elevation: 3,
-                        child: SafeArea(
-                          child: BlocBuilder<PokemonCubit, PokemonState>(
-                            builder: (context, pokemonState) {
-                              if (pokemonState is PokemonLoadingState) {
-                                return Center(
-                                  child: CircularProgressIndicator(
-                                    color: Colors.red.shade700,
-                                  ),
-                                );
-                              }
-                              if (pokemonState is PokemonErrorState) {
-                                return Center(
-                                  child: Icon(
-                                    Icons.warning_amber_rounded,
-                                    color: Colors.red.shade700,
-                                  ),
-                                );
-                              }
-                              for (var i = 0; i < 2; i++) {}
-                              return SizedBox(
+                  return BlocBuilder<PokemonCubit, PokemonState>(
+                    builder: (context, pokemonState) {
+                      return GridView.builder(
+                        itemCount: 50,
+                        gridDelegate:
+                            const SliverGridDelegateWithMaxCrossAxisExtent(
+                          maxCrossAxisExtent: 200,
+                          mainAxisSpacing: 10,
+                          crossAxisSpacing: 10,
+                        ),
+                        itemBuilder: (context, index) {
+                          final pokemon = _pokemonCubit.pokemonList[index + 1];
+
+                          if (pokemon != null) {
+                            return Card(
+                              color: whiteColor,
+                              margin: EdgeInsets.zero,
+                              elevation: 3,
+                              child: SafeArea(
                                 child: Column(
                                   children: [
                                     Align(
@@ -76,14 +79,13 @@ class PokemonListWidget extends StatelessWidget {
                                       child: Padding(
                                         padding: const EdgeInsets.symmetric(
                                             horizontal: 10),
-                                        child: Text(
-                                            "#${pokemonState.pokemon!.id}"),
+                                        child: Text("#${pokemon.id}"),
                                       ),
                                     ),
                                     Expanded(
                                       child: Image.network(
-                                        pokemonState.pokemon!.sprites.other!
-                                            .officialArtwork.frontDefault,
+                                        pokemon.sprites.other!.officialArtwork
+                                            .frontDefault,
                                         fit: BoxFit.contain,
                                       ),
                                     ),
@@ -94,10 +96,15 @@ class PokemonListWidget extends StatelessWidget {
                                     ),
                                   ],
                                 ),
-                              );
-                            },
-                          ),
-                        ),
+                              ),
+                            );
+                          }
+                          return Center(
+                            child: CircularProgressIndicator(
+                              color: Colors.red.shade700,
+                            ),
+                          );
+                        },
                       );
                     },
                   );
