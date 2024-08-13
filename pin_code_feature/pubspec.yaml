@@ -14,6 +14,14 @@ dependencies:
   pin_code_fields:
   flutter_screenutil:
 
+  # Camera
+  camera: ^0.11.0+2
+  path_provider: ^2.1.4
+  path: ^1.9.0
+
+  # Service locator
+  get_it:
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

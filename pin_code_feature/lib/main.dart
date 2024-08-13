@@ -1,10 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:pin_code_feature/screens/home_screen.dart';
-import 'package:pin_code_feature/screens/pin_code_verifycation_screen.dart';
+import 'package:pin_code_feature/custom_navigator_observer.dart';
+import 'package:pin_code_feature/injection_container.dart';
+import 'package:pin_code_feature/screens/nav_screen.dart';
+import 'package:pin_code_feature/screens/pin_code_verification_screen.dart';
 
-void main() {
+final CustomNavigatorObserver customNavigatorObserver =
+    CustomNavigatorObserver();
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  setupLocator();
   runApp(const MainApp());
 }
 
@@ -23,9 +30,11 @@ class MainApp extends StatelessWidget {
           textTheme: GoogleFonts.notoSansMonoTextTheme(),
           useMaterial3: true,
         ),
+        navigatorObservers: [customNavigatorObserver],
+        initialRoute: '/pinScreen',
         routes: {
-          '/': (context) => const PinCodeVerifycationScreen(),
-          '/homeScreen': (context) => const HomeScreen(),
+          '/': (context) => const NavScreen(),
+          '/pinScreen': (context) => const PinCodeVerificationScreen(),
         },
       ),
     );

@@ -4,15 +4,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
-class PinCodeVerifycationScreen extends StatefulWidget {
-  const PinCodeVerifycationScreen({super.key});
+final RouteObserver<PageRoute> routeObserver = RouteObserver<PageRoute>();
+
+class PinCodeVerificationScreen extends StatefulWidget {
+  const PinCodeVerificationScreen({super.key});
 
   @override
-  State<PinCodeVerifycationScreen> createState() =>
-      _PinCodeVerifycationScreenState();
+  State<PinCodeVerificationScreen> createState() =>
+      _PinCodeVerificationScreenState();
 }
 
-class _PinCodeVerifycationScreenState extends State<PinCodeVerifycationScreen> {
+class _PinCodeVerificationScreenState extends State<PinCodeVerificationScreen>
+    with RouteAware {
   String pinCode = "1509";
   bool hasError = false;
   bool hasFilledAllFiled = true;
@@ -51,9 +54,21 @@ class _PinCodeVerifycationScreenState extends State<PinCodeVerifycationScreen> {
       //   content: Text('Congratulation'),
       //   duration: Duration(milliseconds: 1000),
       // ));
-      Navigator.pushNamed(context, '/homeScreen');
+      Navigator.pop(context);
       textController.clear();
     }
+  }
+
+  @override
+  void didPush() {
+    super.didPush();
+    debugPrint('PinCodeScreen pushed');
+  }
+
+  @override
+  void didPopNext() {
+    super.didPopNext();
+    debugPrint('PinCodeScreen is now visible');
   }
 
   @override
@@ -65,28 +80,30 @@ class _PinCodeVerifycationScreenState extends State<PinCodeVerifycationScreen> {
   @override
   void dispose() {
     errorController.close();
-    super.dispose;
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       backgroundColor: const Color.fromARGB(255, 245, 245, 245),
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 200.w),
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Padding(
               padding: EdgeInsets.symmetric(vertical: 160.h),
               child: Icon(
                 Icons.shield_moon_rounded,
-                size: 200,
+                size: 500.w,
                 color: Colors.blue.shade500,
               ),
             ),
-            const Text(
+            Text(
               "Please enter PIN",
-              style: TextStyle(fontSize: 30),
+              style: TextStyle(fontSize: 80.sp),
             ),
             Form(
               key: formKey,
@@ -109,8 +126,9 @@ class _PinCodeVerifycationScreenState extends State<PinCodeVerifycationScreen> {
                     shape: PinCodeFieldShape.box,
                     borderRadius: BorderRadius.circular(10.r),
                     inactiveColor: Colors.black,
+                    errorBorderColor: hasError ? Colors.red : Colors.black,
                     fieldHeight: 200.h,
-                    fieldWidth: 160.w,
+                    fieldWidth: 150.w,
                   ),
                   onTap: () {
                     setState(() {
@@ -127,9 +145,9 @@ class _PinCodeVerifycationScreenState extends State<PinCodeVerifycationScreen> {
                   : hasError == true
                       ? "Incorect PIN code"
                       : "",
-              style: const TextStyle(
+              style: TextStyle(
                 color: Colors.red,
-                fontSize: 20,
+                fontSize: 80.sp,
               ),
             ),
             const Spacer(),
@@ -147,9 +165,9 @@ class _PinCodeVerifycationScreenState extends State<PinCodeVerifycationScreen> {
                   ),
                   child: Padding(
                     padding: EdgeInsets.symmetric(vertical: 20.h),
-                    child: const Text(
+                    child: Text(
                       "Verify",
-                      style: TextStyle(fontSize: 30),
+                      style: TextStyle(fontSize: 80.sp),
                     ),
                   ),
                 ),
