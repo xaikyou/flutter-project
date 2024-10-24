@@ -1,4 +1,4 @@
-import 'package:ble_connection/bloc/ble_connectivity_bloc.dart';
+import 'package:ble_connection/bloc/ble_connectivity/ble_connectivity_bloc.dart';
 import 'package:ble_connection/home_page.dart';
 import 'package:ble_connection/service_locator/service_locator.dart';
 import 'package:flutter/material.dart';
