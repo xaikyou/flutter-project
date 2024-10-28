@@ -31,19 +31,19 @@ class _HomePageState extends State<HomePage> {
                 child: Column(
                   children: [
                     /// Connection State
-                    const SizedBox(height: 24),
+                    const SizedBox(height: 16),
                     _checkConnectionStatus(isConencted),
 
                     /// Open Ble Button
-                    const SizedBox(height: 24),
+                    const SizedBox(height: 16),
                     _openBleButton(isConencted),
 
                     /// Scan Button
-                    const SizedBox(height: 24),
+                    const SizedBox(height: 16),
                     _scanButton(isConencted),
 
                     /// Show Devices Scanned
-                    const SizedBox(height: 24),
+                    const SizedBox(height: 16),
                     BlocBuilder<ScanDevicesBloc, ScanDevicesState>(
                       builder: (context, state) {
                         return Expanded(
@@ -66,7 +66,7 @@ class _HomePageState extends State<HomePage> {
         const Text(
           'State: ',
           style: TextStyle(
-            fontSize: 24,
+            fontSize: 16,
             fontWeight: FontWeight.bold,
           ),
         ),
@@ -124,13 +124,13 @@ class _HomePageState extends State<HomePage> {
             style: FilledButton.styleFrom(
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(8)),
-              backgroundColor: Colors.blueAccent,
+              backgroundColor: isScanning ? Colors.red : Colors.blueAccent,
             ),
-            child: const Padding(
-              padding: EdgeInsets.all(8.0),
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
               child: Text(
-                'Start Scan',
-                style: TextStyle(
+                isScanning ? 'Stop Scan' : 'Start Scan',
+                style: const TextStyle(
                   fontSize: 24,
                   fontWeight: FontWeight.bold,
                 ),
@@ -145,16 +145,54 @@ class _HomePageState extends State<HomePage> {
   Widget _showScanResults(List<ScanResult> results) {
     return Material(
       color: Colors.transparent,
-      child: ListView.builder(
+      child: ListView.separated(
         shrinkWrap: true,
         itemCount: results.length,
         itemBuilder: (context, index) {
-          String title = results[index].device.remoteId.str;
+          if (results[index].advertisementData.connectable == false ||
+              results[index].device.platformName.isEmpty) {
+            return const SizedBox.shrink();
+          }
+
+          String title = results[index].device.platformName;
           return ListTile(
-            title: Text(title, style: const TextStyle(fontSize: 20)),
-            tileColor: index % 2 == 0 ? Colors.blueGrey.shade100 : Colors.white,
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(4),
+                side: const BorderSide(
+                  color: Colors.black,
+                  width: 1,
+                )),
+            tileColor: Colors.white,
+            contentPadding: const EdgeInsets.only(left: 8),
+            title: Text(
+              title,
+              style: const TextStyle(fontSize: 20),
+              overflow: TextOverflow.ellipsis,
+            ),
+            trailing: SizedBox(
+              height: double.infinity,
+              child: FilledButton(
+                onPressed: () {},
+                style: FilledButton.styleFrom(
+                  padding: const EdgeInsets.symmetric(horizontal: 8),
+                  shape: const RoundedRectangleBorder(),
+                  backgroundColor: Colors.black,
+                ),
+                child: const Text(
+                  'CONNECT',
+                  style: TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+            ),
           );
         },
+        separatorBuilder: (BuildContext context, int index) => const Divider(
+          color: Colors.transparent,
+          height: 0.25,
+        ),
       ),
     );
   }
