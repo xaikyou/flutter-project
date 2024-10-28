@@ -1,5 +1,8 @@
 import 'package:ble_connection/bloc/ble_connectivity/ble_connectivity_bloc.dart';
+import 'package:ble_connection/bloc/device_connectivity/device_connectivity_bloc.dart';
 import 'package:ble_connection/bloc/scan_devices/scan_devices_bloc.dart';
+import 'package:ble_connection/cubit/handles_connection_cubit.dart';
+import 'package:ble_connection/device_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_blue_plus/flutter_blue_plus.dart';
@@ -14,10 +17,15 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => ScanDevicesBloc()
-        ..add(const ScanDevicesScanning())
-        ..add(const ScanDevicesCheck()),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => ScanDevicesBloc()
+            ..add(const ScanDevicesScanning())
+            ..add(const ScanDevicesCheck()),
+        ),
+        BlocProvider(create: (context) => HandlesConnectionCubit()),
+      ],
       child: Scaffold(
         body: SafeArea(
           child: BlocBuilder<BleConnectivityBloc, BleConnectivityState>(
@@ -47,7 +55,16 @@ class _HomePageState extends State<HomePage> {
                     BlocBuilder<ScanDevicesBloc, ScanDevicesState>(
                       builder: (context, state) {
                         return Expanded(
-                            child: _showScanResults(state.data.scanResults));
+                          child: ListView(
+                            shrinkWrap: true,
+                            children: [
+                              ..._buildSystemDeviceTiles(
+                                  context, state.data.connectedDevices),
+                              ..._buildScanResultTiles(
+                                  context, state.data.scanResults),
+                            ],
+                          ),
+                        );
                       },
                     ),
                   ],
@@ -64,9 +81,9 @@ class _HomePageState extends State<HomePage> {
     return Row(
       children: [
         const Text(
-          'State: ',
+          'Status: ',
           style: TextStyle(
-            fontSize: 16,
+            fontSize: 20,
             fontWeight: FontWeight.bold,
           ),
         ),
@@ -142,58 +159,77 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  Widget _showScanResults(List<ScanResult> results) {
-    return Material(
-      color: Colors.transparent,
-      child: ListView.separated(
-        shrinkWrap: true,
-        itemCount: results.length,
-        itemBuilder: (context, index) {
-          if (results[index].advertisementData.connectable == false ||
-              results[index].device.platformName.isEmpty) {
-            return const SizedBox.shrink();
-          }
+  void _onConnectPressed(BuildContext context, BluetoothDevice device) {
+    context.read<HandlesConnectionCubit>().handleConnectionToDevice(device);
+  }
 
-          String title = results[index].device.platformName;
-          return ListTile(
-            shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(4),
-                side: const BorderSide(
-                  color: Colors.black,
-                  width: 1,
-                )),
-            tileColor: Colors.white,
-            contentPadding: const EdgeInsets.only(left: 8),
-            title: Text(
-              title,
-              style: const TextStyle(fontSize: 20),
-              overflow: TextOverflow.ellipsis,
-            ),
-            trailing: SizedBox(
-              height: double.infinity,
-              child: FilledButton(
-                onPressed: () {},
-                style: FilledButton.styleFrom(
-                  padding: const EdgeInsets.symmetric(horizontal: 8),
-                  shape: const RoundedRectangleBorder(),
-                  backgroundColor: Colors.black,
+  List<Widget> _buildSystemDeviceTiles(
+      BuildContext context, List<BluetoothDevice> systemDevices) {
+    return systemDevices
+        .map((d) => BlocProvider(
+              create: (context) {
+                final bloc = DeviceConnectivityBloc(d);
+                bloc.add(const DeviceConnectivityWatching());
+                return bloc;
+              },
+              child: ListTile(
+                contentPadding: EdgeInsets.zero,
+                title: Text(
+                  d.platformName,
+                  style: const TextStyle(fontSize: 20, color: Colors.redAccent),
                 ),
-                child: const Text(
-                  'CONNECT',
-                  style: TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.bold,
-                  ),
+                subtitle: const Text(
+                  'Connected',
+                  style: TextStyle(fontSize: 16, color: Colors.redAccent),
+                ),
+                trailing: const Icon(
+                  Icons.arrow_forward_ios_rounded,
+                ),
+                onTap: () => Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => DevicePage(
+                            device: d,
+                          )),
                 ),
               ),
-            ),
-          );
-        },
-        separatorBuilder: (BuildContext context, int index) => const Divider(
-          color: Colors.transparent,
-          height: 0.25,
-        ),
-      ),
-    );
+            ))
+        .toList();
+  }
+
+  List<Widget> _buildScanResultTiles(
+      BuildContext context, List<ScanResult> results) {
+    return results
+        .map(
+          (r) => r.advertisementData.connectable == true &&
+                  r.device.platformName.isNotEmpty
+              ? BlocProvider(
+                  create: (context) => DeviceConnectivityBloc(r.device)
+                    ..add(const DeviceConnectivityWatching()),
+                  child: BlocListener<DeviceConnectivityBloc,
+                      DeviceConnectivityState>(
+                    listener: (context, state) {
+                      if (state.data.connectionState ==
+                          BluetoothConnectionState.connected) {
+                        context
+                            .read<ScanDevicesBloc>()
+                            .add(ScanDevicesUpdateResults(result: r));
+                      }
+                    },
+                    child: ListTile(
+                      contentPadding: EdgeInsets.zero,
+                      title: Text(
+                        r.device.platformName,
+                        style: const TextStyle(fontSize: 20),
+                      ),
+                      onTap: () {
+                        _onConnectPressed(context, r.device);
+                      },
+                    ),
+                  ),
+                )
+              : const SizedBox.shrink(),
+        )
+        .toList();
   }
 }

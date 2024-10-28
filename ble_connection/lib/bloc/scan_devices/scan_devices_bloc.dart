@@ -16,29 +16,45 @@ class ScanDevicesBloc extends Bloc<ScanDevicesEvent, ScanDevicesState> {
         super(const ScanDevicesInitial(ScanDevicesStateData())) {
     on<ScanDevicesEvent>((event, emit) {});
     on<ScanDevicesStart>(
-      (event, emit) async => await _onStartScan(event, emit),
+      (event, emit) async => await _onStartScan(emit),
     );
     on<ScanDevicesStop>(
-      (event, emit) async => await _onStopScan(event, emit),
+      (event, emit) async => await _onStopScan(emit),
     );
     on<ScanDevicesScanning>(
-      (event, emit) async => await _onScanningDevices(event, emit),
+      (event, emit) async => await _onScanningDevices(emit),
     );
     on<ScanDevicesCheck>(
-      (event, emit) async => await _onCheckingDevices(event, emit),
+      (event, emit) async => await _onCheckingDevices(emit),
+    );
+    on<ScanDevicesUpdateResults>(
+      (event, emit) async => _onUpdateResults(event, emit),
     );
   }
 
-  Future<void> _onScanningDevices(
-      ScanDevicesScanning event, Emitter<ScanDevicesState> emit) async {
+  Future<void> _onUpdateResults(
+      ScanDevicesUpdateResults event, Emitter<ScanDevicesState> emit) async {
+    final scanResults = [...state.data.scanResults];
+    final connectedDevices = [...state.data.connectedDevices];
+    scanResults.removeWhere(
+      (element) => element.device.remoteId == event.result.device.remoteId,
+    );
+    await _onStopScan(emit);
+    connectedDevices.add(event.result.device);
+    emit(ScanDevicesUpdated(state.data.copyWith(
+      scanResults: scanResults,
+      connectedDevices: connectedDevices,
+    )));
+  }
+
+  Future<void> _onScanningDevices(Emitter<ScanDevicesState> emit) async {
     await emit.forEach(_scanDeviceService.scanResults, onData: (data) {
       return ScanDevicesInProgress(
           state.data.copyWith(isScanning: true, scanResults: data));
     });
   }
 
-  Future<void> _onCheckingDevices(
-      ScanDevicesCheck event, Emitter<ScanDevicesState> emit) async {
+  Future<void> _onCheckingDevices(Emitter<ScanDevicesState> emit) async {
     await emit.forEach(_scanDeviceService.isScanning, onData: (data) {
       if (data) {
         return ScanDevicesInProgress(state.data.copyWith(isScanning: true));
@@ -47,8 +63,7 @@ class ScanDevicesBloc extends Bloc<ScanDevicesEvent, ScanDevicesState> {
     });
   }
 
-  Future<void> _onStartScan(
-      ScanDevicesStart event, Emitter<ScanDevicesState> emit) async {
+  Future<void> _onStartScan(Emitter<ScanDevicesState> emit) async {
     try {
       await _scanDeviceService.startScan();
       final connectedDevices = await _scanDeviceService.connectedDevices;
@@ -60,8 +75,7 @@ class ScanDevicesBloc extends Bloc<ScanDevicesEvent, ScanDevicesState> {
     }
   }
 
-  Future<void> _onStopScan(
-      ScanDevicesStop event, Emitter<ScanDevicesState> emit) async {
+  Future<void> _onStopScan(Emitter<ScanDevicesState> emit) async {
     try {
       await _scanDeviceService.stopScan();
       emit(ScanDevicesStopped(state.data.copyWith(isScanning: false)));

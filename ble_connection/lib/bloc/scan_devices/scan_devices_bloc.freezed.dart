@@ -22,6 +22,7 @@ mixin _$ScanDevicesEvent {
     required TResult Function() scanDevicesScanning,
     required TResult Function() scanDevicesStop,
     required TResult Function() scanDevicesCheck,
+    required TResult Function(ScanResult result) scanDevicesUpdateResults,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -30,6 +31,7 @@ mixin _$ScanDevicesEvent {
     TResult? Function()? scanDevicesScanning,
     TResult? Function()? scanDevicesStop,
     TResult? Function()? scanDevicesCheck,
+    TResult? Function(ScanResult result)? scanDevicesUpdateResults,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -38,6 +40,7 @@ mixin _$ScanDevicesEvent {
     TResult Function()? scanDevicesScanning,
     TResult Function()? scanDevicesStop,
     TResult Function()? scanDevicesCheck,
+    TResult Function(ScanResult result)? scanDevicesUpdateResults,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -47,6 +50,8 @@ mixin _$ScanDevicesEvent {
     required TResult Function(ScanDevicesScanning value) scanDevicesScanning,
     required TResult Function(ScanDevicesStop value) scanDevicesStop,
     required TResult Function(ScanDevicesCheck value) scanDevicesCheck,
+    required TResult Function(ScanDevicesUpdateResults value)
+        scanDevicesUpdateResults,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -55,6 +60,7 @@ mixin _$ScanDevicesEvent {
     TResult? Function(ScanDevicesScanning value)? scanDevicesScanning,
     TResult? Function(ScanDevicesStop value)? scanDevicesStop,
     TResult? Function(ScanDevicesCheck value)? scanDevicesCheck,
+    TResult? Function(ScanDevicesUpdateResults value)? scanDevicesUpdateResults,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -63,6 +69,7 @@ mixin _$ScanDevicesEvent {
     TResult Function(ScanDevicesScanning value)? scanDevicesScanning,
     TResult Function(ScanDevicesStop value)? scanDevicesStop,
     TResult Function(ScanDevicesCheck value)? scanDevicesCheck,
+    TResult Function(ScanDevicesUpdateResults value)? scanDevicesUpdateResults,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -128,6 +135,7 @@ class _$ScanDevicesStartImpl implements ScanDevicesStart {
     required TResult Function() scanDevicesScanning,
     required TResult Function() scanDevicesStop,
     required TResult Function() scanDevicesCheck,
+    required TResult Function(ScanResult result) scanDevicesUpdateResults,
   }) {
     return scanDevicesStart();
   }
@@ -139,6 +147,7 @@ class _$ScanDevicesStartImpl implements ScanDevicesStart {
     TResult? Function()? scanDevicesScanning,
     TResult? Function()? scanDevicesStop,
     TResult? Function()? scanDevicesCheck,
+    TResult? Function(ScanResult result)? scanDevicesUpdateResults,
   }) {
     return scanDevicesStart?.call();
   }
@@ -150,6 +159,7 @@ class _$ScanDevicesStartImpl implements ScanDevicesStart {
     TResult Function()? scanDevicesScanning,
     TResult Function()? scanDevicesStop,
     TResult Function()? scanDevicesCheck,
+    TResult Function(ScanResult result)? scanDevicesUpdateResults,
     required TResult orElse(),
   }) {
     if (scanDevicesStart != null) {
@@ -165,6 +175,8 @@ class _$ScanDevicesStartImpl implements ScanDevicesStart {
     required TResult Function(ScanDevicesScanning value) scanDevicesScanning,
     required TResult Function(ScanDevicesStop value) scanDevicesStop,
     required TResult Function(ScanDevicesCheck value) scanDevicesCheck,
+    required TResult Function(ScanDevicesUpdateResults value)
+        scanDevicesUpdateResults,
   }) {
     return scanDevicesStart(this);
   }
@@ -176,6 +188,7 @@ class _$ScanDevicesStartImpl implements ScanDevicesStart {
     TResult? Function(ScanDevicesScanning value)? scanDevicesScanning,
     TResult? Function(ScanDevicesStop value)? scanDevicesStop,
     TResult? Function(ScanDevicesCheck value)? scanDevicesCheck,
+    TResult? Function(ScanDevicesUpdateResults value)? scanDevicesUpdateResults,
   }) {
     return scanDevicesStart?.call(this);
   }
@@ -187,6 +200,7 @@ class _$ScanDevicesStartImpl implements ScanDevicesStart {
     TResult Function(ScanDevicesScanning value)? scanDevicesScanning,
     TResult Function(ScanDevicesStop value)? scanDevicesStop,
     TResult Function(ScanDevicesCheck value)? scanDevicesCheck,
+    TResult Function(ScanDevicesUpdateResults value)? scanDevicesUpdateResults,
     required TResult orElse(),
   }) {
     if (scanDevicesStart != null) {
@@ -243,6 +257,7 @@ class _$ScanDevicesScanningImpl implements ScanDevicesScanning {
     required TResult Function() scanDevicesScanning,
     required TResult Function() scanDevicesStop,
     required TResult Function() scanDevicesCheck,
+    required TResult Function(ScanResult result) scanDevicesUpdateResults,
   }) {
     return scanDevicesScanning();
   }
@@ -254,6 +269,7 @@ class _$ScanDevicesScanningImpl implements ScanDevicesScanning {
     TResult? Function()? scanDevicesScanning,
     TResult? Function()? scanDevicesStop,
     TResult? Function()? scanDevicesCheck,
+    TResult? Function(ScanResult result)? scanDevicesUpdateResults,
   }) {
     return scanDevicesScanning?.call();
   }
@@ -265,6 +281,7 @@ class _$ScanDevicesScanningImpl implements ScanDevicesScanning {
     TResult Function()? scanDevicesScanning,
     TResult Function()? scanDevicesStop,
     TResult Function()? scanDevicesCheck,
+    TResult Function(ScanResult result)? scanDevicesUpdateResults,
     required TResult orElse(),
   }) {
     if (scanDevicesScanning != null) {
@@ -280,6 +297,8 @@ class _$ScanDevicesScanningImpl implements ScanDevicesScanning {
     required TResult Function(ScanDevicesScanning value) scanDevicesScanning,
     required TResult Function(ScanDevicesStop value) scanDevicesStop,
     required TResult Function(ScanDevicesCheck value) scanDevicesCheck,
+    required TResult Function(ScanDevicesUpdateResults value)
+        scanDevicesUpdateResults,
   }) {
     return scanDevicesScanning(this);
   }
@@ -291,6 +310,7 @@ class _$ScanDevicesScanningImpl implements ScanDevicesScanning {
     TResult? Function(ScanDevicesScanning value)? scanDevicesScanning,
     TResult? Function(ScanDevicesStop value)? scanDevicesStop,
     TResult? Function(ScanDevicesCheck value)? scanDevicesCheck,
+    TResult? Function(ScanDevicesUpdateResults value)? scanDevicesUpdateResults,
   }) {
     return scanDevicesScanning?.call(this);
   }
@@ -302,6 +322,7 @@ class _$ScanDevicesScanningImpl implements ScanDevicesScanning {
     TResult Function(ScanDevicesScanning value)? scanDevicesScanning,
     TResult Function(ScanDevicesStop value)? scanDevicesStop,
     TResult Function(ScanDevicesCheck value)? scanDevicesCheck,
+    TResult Function(ScanDevicesUpdateResults value)? scanDevicesUpdateResults,
     required TResult orElse(),
   }) {
     if (scanDevicesScanning != null) {
@@ -357,6 +378,7 @@ class _$ScanDevicesStopImpl implements ScanDevicesStop {
     required TResult Function() scanDevicesScanning,
     required TResult Function() scanDevicesStop,
     required TResult Function() scanDevicesCheck,
+    required TResult Function(ScanResult result) scanDevicesUpdateResults,
   }) {
     return scanDevicesStop();
   }
@@ -368,6 +390,7 @@ class _$ScanDevicesStopImpl implements ScanDevicesStop {
     TResult? Function()? scanDevicesScanning,
     TResult? Function()? scanDevicesStop,
     TResult? Function()? scanDevicesCheck,
+    TResult? Function(ScanResult result)? scanDevicesUpdateResults,
   }) {
     return scanDevicesStop?.call();
   }
@@ -379,6 +402,7 @@ class _$ScanDevicesStopImpl implements ScanDevicesStop {
     TResult Function()? scanDevicesScanning,
     TResult Function()? scanDevicesStop,
     TResult Function()? scanDevicesCheck,
+    TResult Function(ScanResult result)? scanDevicesUpdateResults,
     required TResult orElse(),
   }) {
     if (scanDevicesStop != null) {
@@ -394,6 +418,8 @@ class _$ScanDevicesStopImpl implements ScanDevicesStop {
     required TResult Function(ScanDevicesScanning value) scanDevicesScanning,
     required TResult Function(ScanDevicesStop value) scanDevicesStop,
     required TResult Function(ScanDevicesCheck value) scanDevicesCheck,
+    required TResult Function(ScanDevicesUpdateResults value)
+        scanDevicesUpdateResults,
   }) {
     return scanDevicesStop(this);
   }
@@ -405,6 +431,7 @@ class _$ScanDevicesStopImpl implements ScanDevicesStop {
     TResult? Function(ScanDevicesScanning value)? scanDevicesScanning,
     TResult? Function(ScanDevicesStop value)? scanDevicesStop,
     TResult? Function(ScanDevicesCheck value)? scanDevicesCheck,
+    TResult? Function(ScanDevicesUpdateResults value)? scanDevicesUpdateResults,
   }) {
     return scanDevicesStop?.call(this);
   }
@@ -416,6 +443,7 @@ class _$ScanDevicesStopImpl implements ScanDevicesStop {
     TResult Function(ScanDevicesScanning value)? scanDevicesScanning,
     TResult Function(ScanDevicesStop value)? scanDevicesStop,
     TResult Function(ScanDevicesCheck value)? scanDevicesCheck,
+    TResult Function(ScanDevicesUpdateResults value)? scanDevicesUpdateResults,
     required TResult orElse(),
   }) {
     if (scanDevicesStop != null) {
@@ -471,6 +499,7 @@ class _$ScanDevicesCheckImpl implements ScanDevicesCheck {
     required TResult Function() scanDevicesScanning,
     required TResult Function() scanDevicesStop,
     required TResult Function() scanDevicesCheck,
+    required TResult Function(ScanResult result) scanDevicesUpdateResults,
   }) {
     return scanDevicesCheck();
   }
@@ -482,6 +511,7 @@ class _$ScanDevicesCheckImpl implements ScanDevicesCheck {
     TResult? Function()? scanDevicesScanning,
     TResult? Function()? scanDevicesStop,
     TResult? Function()? scanDevicesCheck,
+    TResult? Function(ScanResult result)? scanDevicesUpdateResults,
   }) {
     return scanDevicesCheck?.call();
   }
@@ -493,6 +523,7 @@ class _$ScanDevicesCheckImpl implements ScanDevicesCheck {
     TResult Function()? scanDevicesScanning,
     TResult Function()? scanDevicesStop,
     TResult Function()? scanDevicesCheck,
+    TResult Function(ScanResult result)? scanDevicesUpdateResults,
     required TResult orElse(),
   }) {
     if (scanDevicesCheck != null) {
@@ -508,6 +539,8 @@ class _$ScanDevicesCheckImpl implements ScanDevicesCheck {
     required TResult Function(ScanDevicesScanning value) scanDevicesScanning,
     required TResult Function(ScanDevicesStop value) scanDevicesStop,
     required TResult Function(ScanDevicesCheck value) scanDevicesCheck,
+    required TResult Function(ScanDevicesUpdateResults value)
+        scanDevicesUpdateResults,
   }) {
     return scanDevicesCheck(this);
   }
@@ -519,6 +552,7 @@ class _$ScanDevicesCheckImpl implements ScanDevicesCheck {
     TResult? Function(ScanDevicesScanning value)? scanDevicesScanning,
     TResult? Function(ScanDevicesStop value)? scanDevicesStop,
     TResult? Function(ScanDevicesCheck value)? scanDevicesCheck,
+    TResult? Function(ScanDevicesUpdateResults value)? scanDevicesUpdateResults,
   }) {
     return scanDevicesCheck?.call(this);
   }
@@ -530,6 +564,7 @@ class _$ScanDevicesCheckImpl implements ScanDevicesCheck {
     TResult Function(ScanDevicesScanning value)? scanDevicesScanning,
     TResult Function(ScanDevicesStop value)? scanDevicesStop,
     TResult Function(ScanDevicesCheck value)? scanDevicesCheck,
+    TResult Function(ScanDevicesUpdateResults value)? scanDevicesUpdateResults,
     required TResult orElse(),
   }) {
     if (scanDevicesCheck != null) {
@@ -541,6 +576,162 @@ class _$ScanDevicesCheckImpl implements ScanDevicesCheck {
 
 abstract class ScanDevicesCheck implements ScanDevicesEvent {
   const factory ScanDevicesCheck() = _$ScanDevicesCheckImpl;
+}
+
+/// @nodoc
+abstract class _$$ScanDevicesUpdateResultsImplCopyWith<$Res> {
+  factory _$$ScanDevicesUpdateResultsImplCopyWith(
+          _$ScanDevicesUpdateResultsImpl value,
+          $Res Function(_$ScanDevicesUpdateResultsImpl) then) =
+      __$$ScanDevicesUpdateResultsImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({ScanResult result});
+}
+
+/// @nodoc
+class __$$ScanDevicesUpdateResultsImplCopyWithImpl<$Res>
+    extends _$ScanDevicesEventCopyWithImpl<$Res, _$ScanDevicesUpdateResultsImpl>
+    implements _$$ScanDevicesUpdateResultsImplCopyWith<$Res> {
+  __$$ScanDevicesUpdateResultsImplCopyWithImpl(
+      _$ScanDevicesUpdateResultsImpl _value,
+      $Res Function(_$ScanDevicesUpdateResultsImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? result = null,
+  }) {
+    return _then(_$ScanDevicesUpdateResultsImpl(
+      result: null == result
+          ? _value.result
+          : result // ignore: cast_nullable_to_non_nullable
+              as ScanResult,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$ScanDevicesUpdateResultsImpl implements ScanDevicesUpdateResults {
+  const _$ScanDevicesUpdateResultsImpl({required this.result});
+
+  @override
+  final ScanResult result;
+
+  @override
+  String toString() {
+    return 'ScanDevicesEvent.scanDevicesUpdateResults(result: $result)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$ScanDevicesUpdateResultsImpl &&
+            (identical(other.result, result) || other.result == result));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, result);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$ScanDevicesUpdateResultsImplCopyWith<_$ScanDevicesUpdateResultsImpl>
+      get copyWith => __$$ScanDevicesUpdateResultsImplCopyWithImpl<
+          _$ScanDevicesUpdateResultsImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() scanDevicesStart,
+    required TResult Function() scanDevicesScanning,
+    required TResult Function() scanDevicesStop,
+    required TResult Function() scanDevicesCheck,
+    required TResult Function(ScanResult result) scanDevicesUpdateResults,
+  }) {
+    return scanDevicesUpdateResults(result);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? scanDevicesStart,
+    TResult? Function()? scanDevicesScanning,
+    TResult? Function()? scanDevicesStop,
+    TResult? Function()? scanDevicesCheck,
+    TResult? Function(ScanResult result)? scanDevicesUpdateResults,
+  }) {
+    return scanDevicesUpdateResults?.call(result);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? scanDevicesStart,
+    TResult Function()? scanDevicesScanning,
+    TResult Function()? scanDevicesStop,
+    TResult Function()? scanDevicesCheck,
+    TResult Function(ScanResult result)? scanDevicesUpdateResults,
+    required TResult orElse(),
+  }) {
+    if (scanDevicesUpdateResults != null) {
+      return scanDevicesUpdateResults(result);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(ScanDevicesStart value) scanDevicesStart,
+    required TResult Function(ScanDevicesScanning value) scanDevicesScanning,
+    required TResult Function(ScanDevicesStop value) scanDevicesStop,
+    required TResult Function(ScanDevicesCheck value) scanDevicesCheck,
+    required TResult Function(ScanDevicesUpdateResults value)
+        scanDevicesUpdateResults,
+  }) {
+    return scanDevicesUpdateResults(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(ScanDevicesStart value)? scanDevicesStart,
+    TResult? Function(ScanDevicesScanning value)? scanDevicesScanning,
+    TResult? Function(ScanDevicesStop value)? scanDevicesStop,
+    TResult? Function(ScanDevicesCheck value)? scanDevicesCheck,
+    TResult? Function(ScanDevicesUpdateResults value)? scanDevicesUpdateResults,
+  }) {
+    return scanDevicesUpdateResults?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(ScanDevicesStart value)? scanDevicesStart,
+    TResult Function(ScanDevicesScanning value)? scanDevicesScanning,
+    TResult Function(ScanDevicesStop value)? scanDevicesStop,
+    TResult Function(ScanDevicesCheck value)? scanDevicesCheck,
+    TResult Function(ScanDevicesUpdateResults value)? scanDevicesUpdateResults,
+    required TResult orElse(),
+  }) {
+    if (scanDevicesUpdateResults != null) {
+      return scanDevicesUpdateResults(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class ScanDevicesUpdateResults implements ScanDevicesEvent {
+  const factory ScanDevicesUpdateResults({required final ScanResult result}) =
+      _$ScanDevicesUpdateResultsImpl;
+
+  ScanResult get result;
+  @JsonKey(ignore: true)
+  _$$ScanDevicesUpdateResultsImplCopyWith<_$ScanDevicesUpdateResultsImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -740,6 +931,7 @@ mixin _$ScanDevicesState {
   TResult when<TResult extends Object?>({
     required TResult Function(ScanDevicesStateData data) scanDevicesInitial,
     required TResult Function(ScanDevicesStateData data) scanDevicesInProgress,
+    required TResult Function(ScanDevicesStateData data) scanDevicesUpdated,
     required TResult Function(ScanDevicesStateData data) scanDevicesStopped,
     required TResult Function(ScanDevicesStateData data) scanDevicesFailure,
   }) =>
@@ -748,6 +940,7 @@ mixin _$ScanDevicesState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(ScanDevicesStateData data)? scanDevicesInitial,
     TResult? Function(ScanDevicesStateData data)? scanDevicesInProgress,
+    TResult? Function(ScanDevicesStateData data)? scanDevicesUpdated,
     TResult? Function(ScanDevicesStateData data)? scanDevicesStopped,
     TResult? Function(ScanDevicesStateData data)? scanDevicesFailure,
   }) =>
@@ -756,6 +949,7 @@ mixin _$ScanDevicesState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(ScanDevicesStateData data)? scanDevicesInitial,
     TResult Function(ScanDevicesStateData data)? scanDevicesInProgress,
+    TResult Function(ScanDevicesStateData data)? scanDevicesUpdated,
     TResult Function(ScanDevicesStateData data)? scanDevicesStopped,
     TResult Function(ScanDevicesStateData data)? scanDevicesFailure,
     required TResult orElse(),
@@ -766,6 +960,7 @@ mixin _$ScanDevicesState {
     required TResult Function(ScanDevicesInitial value) scanDevicesInitial,
     required TResult Function(ScanDevicesInProgress value)
         scanDevicesInProgress,
+    required TResult Function(ScanDevicesUpdated value) scanDevicesUpdated,
     required TResult Function(ScanDevicesStopped value) scanDevicesStopped,
     required TResult Function(ScanDevicesFailure value) scanDevicesFailure,
   }) =>
@@ -774,6 +969,7 @@ mixin _$ScanDevicesState {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(ScanDevicesInitial value)? scanDevicesInitial,
     TResult? Function(ScanDevicesInProgress value)? scanDevicesInProgress,
+    TResult? Function(ScanDevicesUpdated value)? scanDevicesUpdated,
     TResult? Function(ScanDevicesStopped value)? scanDevicesStopped,
     TResult? Function(ScanDevicesFailure value)? scanDevicesFailure,
   }) =>
@@ -782,6 +978,7 @@ mixin _$ScanDevicesState {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(ScanDevicesInitial value)? scanDevicesInitial,
     TResult Function(ScanDevicesInProgress value)? scanDevicesInProgress,
+    TResult Function(ScanDevicesUpdated value)? scanDevicesUpdated,
     TResult Function(ScanDevicesStopped value)? scanDevicesStopped,
     TResult Function(ScanDevicesFailure value)? scanDevicesFailure,
     required TResult orElse(),
@@ -908,6 +1105,7 @@ class _$ScanDevicesInitialImpl implements ScanDevicesInitial {
   TResult when<TResult extends Object?>({
     required TResult Function(ScanDevicesStateData data) scanDevicesInitial,
     required TResult Function(ScanDevicesStateData data) scanDevicesInProgress,
+    required TResult Function(ScanDevicesStateData data) scanDevicesUpdated,
     required TResult Function(ScanDevicesStateData data) scanDevicesStopped,
     required TResult Function(ScanDevicesStateData data) scanDevicesFailure,
   }) {
@@ -919,6 +1117,7 @@ class _$ScanDevicesInitialImpl implements ScanDevicesInitial {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(ScanDevicesStateData data)? scanDevicesInitial,
     TResult? Function(ScanDevicesStateData data)? scanDevicesInProgress,
+    TResult? Function(ScanDevicesStateData data)? scanDevicesUpdated,
     TResult? Function(ScanDevicesStateData data)? scanDevicesStopped,
     TResult? Function(ScanDevicesStateData data)? scanDevicesFailure,
   }) {
@@ -930,6 +1129,7 @@ class _$ScanDevicesInitialImpl implements ScanDevicesInitial {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(ScanDevicesStateData data)? scanDevicesInitial,
     TResult Function(ScanDevicesStateData data)? scanDevicesInProgress,
+    TResult Function(ScanDevicesStateData data)? scanDevicesUpdated,
     TResult Function(ScanDevicesStateData data)? scanDevicesStopped,
     TResult Function(ScanDevicesStateData data)? scanDevicesFailure,
     required TResult orElse(),
@@ -946,6 +1146,7 @@ class _$ScanDevicesInitialImpl implements ScanDevicesInitial {
     required TResult Function(ScanDevicesInitial value) scanDevicesInitial,
     required TResult Function(ScanDevicesInProgress value)
         scanDevicesInProgress,
+    required TResult Function(ScanDevicesUpdated value) scanDevicesUpdated,
     required TResult Function(ScanDevicesStopped value) scanDevicesStopped,
     required TResult Function(ScanDevicesFailure value) scanDevicesFailure,
   }) {
@@ -957,6 +1158,7 @@ class _$ScanDevicesInitialImpl implements ScanDevicesInitial {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(ScanDevicesInitial value)? scanDevicesInitial,
     TResult? Function(ScanDevicesInProgress value)? scanDevicesInProgress,
+    TResult? Function(ScanDevicesUpdated value)? scanDevicesUpdated,
     TResult? Function(ScanDevicesStopped value)? scanDevicesStopped,
     TResult? Function(ScanDevicesFailure value)? scanDevicesFailure,
   }) {
@@ -968,6 +1170,7 @@ class _$ScanDevicesInitialImpl implements ScanDevicesInitial {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(ScanDevicesInitial value)? scanDevicesInitial,
     TResult Function(ScanDevicesInProgress value)? scanDevicesInProgress,
+    TResult Function(ScanDevicesUpdated value)? scanDevicesUpdated,
     TResult Function(ScanDevicesStopped value)? scanDevicesStopped,
     TResult Function(ScanDevicesFailure value)? scanDevicesFailure,
     required TResult orElse(),
@@ -1064,6 +1267,7 @@ class _$ScanDevicesInProgressImpl implements ScanDevicesInProgress {
   TResult when<TResult extends Object?>({
     required TResult Function(ScanDevicesStateData data) scanDevicesInitial,
     required TResult Function(ScanDevicesStateData data) scanDevicesInProgress,
+    required TResult Function(ScanDevicesStateData data) scanDevicesUpdated,
     required TResult Function(ScanDevicesStateData data) scanDevicesStopped,
     required TResult Function(ScanDevicesStateData data) scanDevicesFailure,
   }) {
@@ -1075,6 +1279,7 @@ class _$ScanDevicesInProgressImpl implements ScanDevicesInProgress {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(ScanDevicesStateData data)? scanDevicesInitial,
     TResult? Function(ScanDevicesStateData data)? scanDevicesInProgress,
+    TResult? Function(ScanDevicesStateData data)? scanDevicesUpdated,
     TResult? Function(ScanDevicesStateData data)? scanDevicesStopped,
     TResult? Function(ScanDevicesStateData data)? scanDevicesFailure,
   }) {
@@ -1086,6 +1291,7 @@ class _$ScanDevicesInProgressImpl implements ScanDevicesInProgress {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(ScanDevicesStateData data)? scanDevicesInitial,
     TResult Function(ScanDevicesStateData data)? scanDevicesInProgress,
+    TResult Function(ScanDevicesStateData data)? scanDevicesUpdated,
     TResult Function(ScanDevicesStateData data)? scanDevicesStopped,
     TResult Function(ScanDevicesStateData data)? scanDevicesFailure,
     required TResult orElse(),
@@ -1102,6 +1308,7 @@ class _$ScanDevicesInProgressImpl implements ScanDevicesInProgress {
     required TResult Function(ScanDevicesInitial value) scanDevicesInitial,
     required TResult Function(ScanDevicesInProgress value)
         scanDevicesInProgress,
+    required TResult Function(ScanDevicesUpdated value) scanDevicesUpdated,
     required TResult Function(ScanDevicesStopped value) scanDevicesStopped,
     required TResult Function(ScanDevicesFailure value) scanDevicesFailure,
   }) {
@@ -1113,6 +1320,7 @@ class _$ScanDevicesInProgressImpl implements ScanDevicesInProgress {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(ScanDevicesInitial value)? scanDevicesInitial,
     TResult? Function(ScanDevicesInProgress value)? scanDevicesInProgress,
+    TResult? Function(ScanDevicesUpdated value)? scanDevicesUpdated,
     TResult? Function(ScanDevicesStopped value)? scanDevicesStopped,
     TResult? Function(ScanDevicesFailure value)? scanDevicesFailure,
   }) {
@@ -1124,6 +1332,7 @@ class _$ScanDevicesInProgressImpl implements ScanDevicesInProgress {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(ScanDevicesInitial value)? scanDevicesInitial,
     TResult Function(ScanDevicesInProgress value)? scanDevicesInProgress,
+    TResult Function(ScanDevicesUpdated value)? scanDevicesUpdated,
     TResult Function(ScanDevicesStopped value)? scanDevicesStopped,
     TResult Function(ScanDevicesFailure value)? scanDevicesFailure,
     required TResult orElse(),
@@ -1145,6 +1354,167 @@ abstract class ScanDevicesInProgress implements ScanDevicesState {
   @JsonKey(ignore: true)
   _$$ScanDevicesInProgressImplCopyWith<_$ScanDevicesInProgressImpl>
       get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$ScanDevicesUpdatedImplCopyWith<$Res>
+    implements $ScanDevicesStateCopyWith<$Res> {
+  factory _$$ScanDevicesUpdatedImplCopyWith(_$ScanDevicesUpdatedImpl value,
+          $Res Function(_$ScanDevicesUpdatedImpl) then) =
+      __$$ScanDevicesUpdatedImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({ScanDevicesStateData data});
+
+  @override
+  $ScanDevicesStateDataCopyWith<$Res> get data;
+}
+
+/// @nodoc
+class __$$ScanDevicesUpdatedImplCopyWithImpl<$Res>
+    extends _$ScanDevicesStateCopyWithImpl<$Res, _$ScanDevicesUpdatedImpl>
+    implements _$$ScanDevicesUpdatedImplCopyWith<$Res> {
+  __$$ScanDevicesUpdatedImplCopyWithImpl(_$ScanDevicesUpdatedImpl _value,
+      $Res Function(_$ScanDevicesUpdatedImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? data = null,
+  }) {
+    return _then(_$ScanDevicesUpdatedImpl(
+      null == data
+          ? _value.data
+          : data // ignore: cast_nullable_to_non_nullable
+              as ScanDevicesStateData,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$ScanDevicesUpdatedImpl implements ScanDevicesUpdated {
+  const _$ScanDevicesUpdatedImpl(this.data);
+
+  @override
+  final ScanDevicesStateData data;
+
+  @override
+  String toString() {
+    return 'ScanDevicesState.scanDevicesUpdated(data: $data)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$ScanDevicesUpdatedImpl &&
+            (identical(other.data, data) || other.data == data));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, data);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$ScanDevicesUpdatedImplCopyWith<_$ScanDevicesUpdatedImpl> get copyWith =>
+      __$$ScanDevicesUpdatedImplCopyWithImpl<_$ScanDevicesUpdatedImpl>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(ScanDevicesStateData data) scanDevicesInitial,
+    required TResult Function(ScanDevicesStateData data) scanDevicesInProgress,
+    required TResult Function(ScanDevicesStateData data) scanDevicesUpdated,
+    required TResult Function(ScanDevicesStateData data) scanDevicesStopped,
+    required TResult Function(ScanDevicesStateData data) scanDevicesFailure,
+  }) {
+    return scanDevicesUpdated(data);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(ScanDevicesStateData data)? scanDevicesInitial,
+    TResult? Function(ScanDevicesStateData data)? scanDevicesInProgress,
+    TResult? Function(ScanDevicesStateData data)? scanDevicesUpdated,
+    TResult? Function(ScanDevicesStateData data)? scanDevicesStopped,
+    TResult? Function(ScanDevicesStateData data)? scanDevicesFailure,
+  }) {
+    return scanDevicesUpdated?.call(data);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(ScanDevicesStateData data)? scanDevicesInitial,
+    TResult Function(ScanDevicesStateData data)? scanDevicesInProgress,
+    TResult Function(ScanDevicesStateData data)? scanDevicesUpdated,
+    TResult Function(ScanDevicesStateData data)? scanDevicesStopped,
+    TResult Function(ScanDevicesStateData data)? scanDevicesFailure,
+    required TResult orElse(),
+  }) {
+    if (scanDevicesUpdated != null) {
+      return scanDevicesUpdated(data);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(ScanDevicesInitial value) scanDevicesInitial,
+    required TResult Function(ScanDevicesInProgress value)
+        scanDevicesInProgress,
+    required TResult Function(ScanDevicesUpdated value) scanDevicesUpdated,
+    required TResult Function(ScanDevicesStopped value) scanDevicesStopped,
+    required TResult Function(ScanDevicesFailure value) scanDevicesFailure,
+  }) {
+    return scanDevicesUpdated(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(ScanDevicesInitial value)? scanDevicesInitial,
+    TResult? Function(ScanDevicesInProgress value)? scanDevicesInProgress,
+    TResult? Function(ScanDevicesUpdated value)? scanDevicesUpdated,
+    TResult? Function(ScanDevicesStopped value)? scanDevicesStopped,
+    TResult? Function(ScanDevicesFailure value)? scanDevicesFailure,
+  }) {
+    return scanDevicesUpdated?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(ScanDevicesInitial value)? scanDevicesInitial,
+    TResult Function(ScanDevicesInProgress value)? scanDevicesInProgress,
+    TResult Function(ScanDevicesUpdated value)? scanDevicesUpdated,
+    TResult Function(ScanDevicesStopped value)? scanDevicesStopped,
+    TResult Function(ScanDevicesFailure value)? scanDevicesFailure,
+    required TResult orElse(),
+  }) {
+    if (scanDevicesUpdated != null) {
+      return scanDevicesUpdated(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class ScanDevicesUpdated implements ScanDevicesState {
+  const factory ScanDevicesUpdated(final ScanDevicesStateData data) =
+      _$ScanDevicesUpdatedImpl;
+
+  @override
+  ScanDevicesStateData get data;
+  @override
+  @JsonKey(ignore: true)
+  _$$ScanDevicesUpdatedImplCopyWith<_$ScanDevicesUpdatedImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -1219,6 +1589,7 @@ class _$ScanDevicesStoppedImpl implements ScanDevicesStopped {
   TResult when<TResult extends Object?>({
     required TResult Function(ScanDevicesStateData data) scanDevicesInitial,
     required TResult Function(ScanDevicesStateData data) scanDevicesInProgress,
+    required TResult Function(ScanDevicesStateData data) scanDevicesUpdated,
     required TResult Function(ScanDevicesStateData data) scanDevicesStopped,
     required TResult Function(ScanDevicesStateData data) scanDevicesFailure,
   }) {
@@ -1230,6 +1601,7 @@ class _$ScanDevicesStoppedImpl implements ScanDevicesStopped {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(ScanDevicesStateData data)? scanDevicesInitial,
     TResult? Function(ScanDevicesStateData data)? scanDevicesInProgress,
+    TResult? Function(ScanDevicesStateData data)? scanDevicesUpdated,
     TResult? Function(ScanDevicesStateData data)? scanDevicesStopped,
     TResult? Function(ScanDevicesStateData data)? scanDevicesFailure,
   }) {
@@ -1241,6 +1613,7 @@ class _$ScanDevicesStoppedImpl implements ScanDevicesStopped {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(ScanDevicesStateData data)? scanDevicesInitial,
     TResult Function(ScanDevicesStateData data)? scanDevicesInProgress,
+    TResult Function(ScanDevicesStateData data)? scanDevicesUpdated,
     TResult Function(ScanDevicesStateData data)? scanDevicesStopped,
     TResult Function(ScanDevicesStateData data)? scanDevicesFailure,
     required TResult orElse(),
@@ -1257,6 +1630,7 @@ class _$ScanDevicesStoppedImpl implements ScanDevicesStopped {
     required TResult Function(ScanDevicesInitial value) scanDevicesInitial,
     required TResult Function(ScanDevicesInProgress value)
         scanDevicesInProgress,
+    required TResult Function(ScanDevicesUpdated value) scanDevicesUpdated,
     required TResult Function(ScanDevicesStopped value) scanDevicesStopped,
     required TResult Function(ScanDevicesFailure value) scanDevicesFailure,
   }) {
@@ -1268,6 +1642,7 @@ class _$ScanDevicesStoppedImpl implements ScanDevicesStopped {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(ScanDevicesInitial value)? scanDevicesInitial,
     TResult? Function(ScanDevicesInProgress value)? scanDevicesInProgress,
+    TResult? Function(ScanDevicesUpdated value)? scanDevicesUpdated,
     TResult? Function(ScanDevicesStopped value)? scanDevicesStopped,
     TResult? Function(ScanDevicesFailure value)? scanDevicesFailure,
   }) {
@@ -1279,6 +1654,7 @@ class _$ScanDevicesStoppedImpl implements ScanDevicesStopped {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(ScanDevicesInitial value)? scanDevicesInitial,
     TResult Function(ScanDevicesInProgress value)? scanDevicesInProgress,
+    TResult Function(ScanDevicesUpdated value)? scanDevicesUpdated,
     TResult Function(ScanDevicesStopped value)? scanDevicesStopped,
     TResult Function(ScanDevicesFailure value)? scanDevicesFailure,
     required TResult orElse(),
@@ -1374,6 +1750,7 @@ class _$ScanDevicesFailureImpl implements ScanDevicesFailure {
   TResult when<TResult extends Object?>({
     required TResult Function(ScanDevicesStateData data) scanDevicesInitial,
     required TResult Function(ScanDevicesStateData data) scanDevicesInProgress,
+    required TResult Function(ScanDevicesStateData data) scanDevicesUpdated,
     required TResult Function(ScanDevicesStateData data) scanDevicesStopped,
     required TResult Function(ScanDevicesStateData data) scanDevicesFailure,
   }) {
@@ -1385,6 +1762,7 @@ class _$ScanDevicesFailureImpl implements ScanDevicesFailure {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(ScanDevicesStateData data)? scanDevicesInitial,
     TResult? Function(ScanDevicesStateData data)? scanDevicesInProgress,
+    TResult? Function(ScanDevicesStateData data)? scanDevicesUpdated,
     TResult? Function(ScanDevicesStateData data)? scanDevicesStopped,
     TResult? Function(ScanDevicesStateData data)? scanDevicesFailure,
   }) {
@@ -1396,6 +1774,7 @@ class _$ScanDevicesFailureImpl implements ScanDevicesFailure {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(ScanDevicesStateData data)? scanDevicesInitial,
     TResult Function(ScanDevicesStateData data)? scanDevicesInProgress,
+    TResult Function(ScanDevicesStateData data)? scanDevicesUpdated,
     TResult Function(ScanDevicesStateData data)? scanDevicesStopped,
     TResult Function(ScanDevicesStateData data)? scanDevicesFailure,
     required TResult orElse(),
@@ -1412,6 +1791,7 @@ class _$ScanDevicesFailureImpl implements ScanDevicesFailure {
     required TResult Function(ScanDevicesInitial value) scanDevicesInitial,
     required TResult Function(ScanDevicesInProgress value)
         scanDevicesInProgress,
+    required TResult Function(ScanDevicesUpdated value) scanDevicesUpdated,
     required TResult Function(ScanDevicesStopped value) scanDevicesStopped,
     required TResult Function(ScanDevicesFailure value) scanDevicesFailure,
   }) {
@@ -1423,6 +1803,7 @@ class _$ScanDevicesFailureImpl implements ScanDevicesFailure {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(ScanDevicesInitial value)? scanDevicesInitial,
     TResult? Function(ScanDevicesInProgress value)? scanDevicesInProgress,
+    TResult? Function(ScanDevicesUpdated value)? scanDevicesUpdated,
     TResult? Function(ScanDevicesStopped value)? scanDevicesStopped,
     TResult? Function(ScanDevicesFailure value)? scanDevicesFailure,
   }) {
@@ -1434,6 +1815,7 @@ class _$ScanDevicesFailureImpl implements ScanDevicesFailure {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(ScanDevicesInitial value)? scanDevicesInitial,
     TResult Function(ScanDevicesInProgress value)? scanDevicesInProgress,
+    TResult Function(ScanDevicesUpdated value)? scanDevicesUpdated,
     TResult Function(ScanDevicesStopped value)? scanDevicesStopped,
     TResult Function(ScanDevicesFailure value)? scanDevicesFailure,
     required TResult orElse(),
