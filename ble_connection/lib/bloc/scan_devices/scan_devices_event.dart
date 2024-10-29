@@ -6,5 +6,4 @@ class ScanDevicesEvent with _$ScanDevicesEvent {
   const factory ScanDevicesEvent.scanDevicesScanning() = ScanDevicesScanning;
   const factory ScanDevicesEvent.scanDevicesStop() = ScanDevicesStop;
   const factory ScanDevicesEvent.scanDevicesCheck() = ScanDevicesCheck;
-  const factory ScanDevicesEvent.scanDevicesUpdate() = ScanDevicesUpdate;
 }

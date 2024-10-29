@@ -1,7 +1,7 @@
 import 'package:ble_connection/bloc/ble_gatt_characteristic/ble_gatt_characteristic_bloc.dart';
 import 'package:ble_connection/bloc/device_connectivity/device_connectivity_bloc.dart';
-import 'package:ble_connection/bloc/enums/dl_notify_code.dart';
 import 'package:ble_connection/constants/dl_config_constant.dart';
+import 'package:ble_connection/enums/dl_notify_code.dart';
 import 'package:ble_connection/functions/format_dl_value.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

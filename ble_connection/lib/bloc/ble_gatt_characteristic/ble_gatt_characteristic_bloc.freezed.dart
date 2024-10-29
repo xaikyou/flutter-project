@@ -149,12 +149,20 @@ class __$$BleGattCharacteristicStartedImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$BleGattCharacteristicStartedImpl
+    with DiagnosticableTreeMixin
     implements _BleGattCharacteristicStarted {
   const _$BleGattCharacteristicStartedImpl();
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'BleGattCharacteristicEvent.bleGattCharacteristicStarted()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty(
+        'type', 'BleGattCharacteristicEvent.bleGattCharacteristicStarted'));
   }
 
   @override
@@ -309,12 +317,20 @@ class __$$BleGattCharacteristicWatchNotifyImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$BleGattCharacteristicWatchNotifyImpl
+    with DiagnosticableTreeMixin
     implements BleGattCharacteristicWatchNotify {
   const _$BleGattCharacteristicWatchNotifyImpl();
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'BleGattCharacteristicEvent.bleGattCharacteristicWatchNotify()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty(
+        'type', 'BleGattCharacteristicEvent.bleGattCharacteristicWatchNotify'));
   }
 
   @override
@@ -469,12 +485,20 @@ class __$$BleGattCharacteristicWatchWriteImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$BleGattCharacteristicWatchWriteImpl
+    with DiagnosticableTreeMixin
     implements BleGattCharacteristicWatchWrite {
   const _$BleGattCharacteristicWatchWriteImpl();
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'BleGattCharacteristicEvent.bleGattCharacteristicWatchWrite()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty(
+        'type', 'BleGattCharacteristicEvent.bleGattCharacteristicWatchWrite'));
   }
 
   @override
@@ -629,12 +653,20 @@ class __$$BleGattCharacteristicWatchReadImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$BleGattCharacteristicWatchReadImpl
+    with DiagnosticableTreeMixin
     implements BleGattCharacteristicWatchRead {
   const _$BleGattCharacteristicWatchReadImpl();
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'BleGattCharacteristicEvent.bleGattCharacteristicWatchRead()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty(
+        'type', 'BleGattCharacteristicEvent.bleGattCharacteristicWatchRead'));
   }
 
   @override
@@ -804,6 +836,7 @@ class __$$BleGattCharacteristicOnWriteImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$BleGattCharacteristicOnWriteImpl
+    with DiagnosticableTreeMixin
     implements BleGattCharacteristicOnWrite {
   const _$BleGattCharacteristicOnWriteImpl(this.value);
 
@@ -811,8 +844,17 @@ class _$BleGattCharacteristicOnWriteImpl
   final String value;
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'BleGattCharacteristicEvent.bleGattCharacteristicOnWrite(value: $value)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty(
+          'type', 'BleGattCharacteristicEvent.bleGattCharacteristicOnWrite'))
+      ..add(DiagnosticsProperty('value', value));
   }
 
   @override
@@ -981,12 +1023,21 @@ class __$$BleGattCharacteristicOnReadImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$BleGattCharacteristicOnReadImpl implements BleGattCharacteristicOnRead {
+class _$BleGattCharacteristicOnReadImpl
+    with DiagnosticableTreeMixin
+    implements BleGattCharacteristicOnRead {
   const _$BleGattCharacteristicOnReadImpl();
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'BleGattCharacteristicEvent.bleGattCharacteristicOnRead()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty(
+        'type', 'BleGattCharacteristicEvent.bleGattCharacteristicOnRead'));
   }
 
   @override
@@ -1141,12 +1192,20 @@ class __$$BleGattCharacteristicOnIsExecuteUpdatedImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$BleGattCharacteristicOnIsExecuteUpdatedImpl
+    with DiagnosticableTreeMixin
     implements BleGattCharacteristicOnIsExecuteUpdated {
   const _$BleGattCharacteristicOnIsExecuteUpdatedImpl();
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'BleGattCharacteristicEvent.bleGattCharacteristicOnIsExecuteUpdated()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty('type',
+        'BleGattCharacteristicEvent.bleGattCharacteristicOnIsExecuteUpdated'));
   }
 
   @override
@@ -1374,6 +1433,7 @@ class __$$BleGattCharacteristicStateDataImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$BleGattCharacteristicStateDataImpl
+    with DiagnosticableTreeMixin
     implements _BleGattCharacteristicStateData {
   const _$BleGattCharacteristicStateDataImpl(
       {this.value, this.isExecuteAction = false});
@@ -1385,8 +1445,17 @@ class _$BleGattCharacteristicStateDataImpl
   final bool isExecuteAction;
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'BleGattCharacteristicStateData(value: $value, isExecuteAction: $isExecuteAction)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'BleGattCharacteristicStateData'))
+      ..add(DiagnosticsProperty('value', value))
+      ..add(DiagnosticsProperty('isExecuteAction', isExecuteAction));
   }
 
   @override
@@ -1676,6 +1745,7 @@ class __$$BleGattCharacteristicInitialImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$BleGattCharacteristicInitialImpl
+    with DiagnosticableTreeMixin
     implements _BleGattCharacteristicInitial {
   const _$BleGattCharacteristicInitialImpl(this.data);
 
@@ -1683,8 +1753,16 @@ class _$BleGattCharacteristicInitialImpl
   final BleGattCharacteristicStateData data;
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'BleGattCharacteristicState.initial(data: $data)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'BleGattCharacteristicState.initial'))
+      ..add(DiagnosticsProperty('data', data));
   }
 
   @override
@@ -1940,6 +2018,7 @@ class __$$BleGattCharacteristicSetNotifyValueImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$BleGattCharacteristicSetNotifyValueImpl
+    with DiagnosticableTreeMixin
     implements BleGattCharacteristicSetNotifyValue {
   const _$BleGattCharacteristicSetNotifyValueImpl(this.data);
 
@@ -1947,8 +2026,17 @@ class _$BleGattCharacteristicSetNotifyValueImpl
   final BleGattCharacteristicStateData data;
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'BleGattCharacteristicState.bleGattCharacteristicSetNotifyValue(data: $data)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type',
+          'BleGattCharacteristicState.bleGattCharacteristicSetNotifyValue'))
+      ..add(DiagnosticsProperty('data', data));
   }
 
   @override
@@ -2204,6 +2292,7 @@ class __$$BleGattCharacteristicSetWriteValueImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$BleGattCharacteristicSetWriteValueImpl
+    with DiagnosticableTreeMixin
     implements BleGattCharacteristicSetWriteValue {
   const _$BleGattCharacteristicSetWriteValueImpl(this.data);
 
@@ -2211,8 +2300,17 @@ class _$BleGattCharacteristicSetWriteValueImpl
   final BleGattCharacteristicStateData data;
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'BleGattCharacteristicState.bleGattCharacteristicSetWriteValue(data: $data)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type',
+          'BleGattCharacteristicState.bleGattCharacteristicSetWriteValue'))
+      ..add(DiagnosticsProperty('data', data));
   }
 
   @override
@@ -2468,6 +2566,7 @@ class __$$BleGattCharacteristicSetReadValueImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$BleGattCharacteristicSetReadValueImpl
+    with DiagnosticableTreeMixin
     implements BleGattCharacteristicSetReadValue {
   const _$BleGattCharacteristicSetReadValueImpl(this.data);
 
@@ -2475,8 +2574,17 @@ class _$BleGattCharacteristicSetReadValueImpl
   final BleGattCharacteristicStateData data;
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'BleGattCharacteristicState.bleGattCharacteristicSetReadValue(data: $data)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type',
+          'BleGattCharacteristicState.bleGattCharacteristicSetReadValue'))
+      ..add(DiagnosticsProperty('data', data));
   }
 
   @override
@@ -2732,6 +2840,7 @@ class __$$BleGattCharacteristicOnWriteWaitingImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$BleGattCharacteristicOnWriteWaitingImpl
+    with DiagnosticableTreeMixin
     implements BleGattCharacteristicOnWriteWaiting {
   const _$BleGattCharacteristicOnWriteWaitingImpl(this.data);
 
@@ -2739,8 +2848,17 @@ class _$BleGattCharacteristicOnWriteWaitingImpl
   final BleGattCharacteristicStateData data;
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'BleGattCharacteristicState.bleGattCharacteristicOnWriteWaiting(data: $data)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type',
+          'BleGattCharacteristicState.bleGattCharacteristicOnWriteWaiting'))
+      ..add(DiagnosticsProperty('data', data));
   }
 
   @override
@@ -2996,6 +3114,7 @@ class __$$BleGattCharacteristicOnWriteSuccessImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$BleGattCharacteristicOnWriteSuccessImpl
+    with DiagnosticableTreeMixin
     implements BleGattCharacteristicOnWriteSuccess {
   const _$BleGattCharacteristicOnWriteSuccessImpl(this.data);
 
@@ -3003,8 +3122,17 @@ class _$BleGattCharacteristicOnWriteSuccessImpl
   final BleGattCharacteristicStateData data;
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'BleGattCharacteristicState.bleGattCharacteristicOnWriteSuccess(data: $data)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type',
+          'BleGattCharacteristicState.bleGattCharacteristicOnWriteSuccess'))
+      ..add(DiagnosticsProperty('data', data));
   }
 
   @override
@@ -3260,6 +3388,7 @@ class __$$BleGattCharacteristicOnWriteFailedImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$BleGattCharacteristicOnWriteFailedImpl
+    with DiagnosticableTreeMixin
     implements BleGattCharacteristicOnWriteFailed {
   const _$BleGattCharacteristicOnWriteFailedImpl(this.data);
 
@@ -3267,8 +3396,17 @@ class _$BleGattCharacteristicOnWriteFailedImpl
   final BleGattCharacteristicStateData data;
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'BleGattCharacteristicState.bleGattCharacteristicOnWriteFailed(data: $data)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type',
+          'BleGattCharacteristicState.bleGattCharacteristicOnWriteFailed'))
+      ..add(DiagnosticsProperty('data', data));
   }
 
   @override
@@ -3524,6 +3662,7 @@ class __$$BleGattCharacteristicOnReadWaitingImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$BleGattCharacteristicOnReadWaitingImpl
+    with DiagnosticableTreeMixin
     implements BleGattCharacteristicOnReadWaiting {
   const _$BleGattCharacteristicOnReadWaitingImpl(this.data);
 
@@ -3531,8 +3670,17 @@ class _$BleGattCharacteristicOnReadWaitingImpl
   final BleGattCharacteristicStateData data;
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'BleGattCharacteristicState.bleGattCharacteristicOnReadWaiting(data: $data)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type',
+          'BleGattCharacteristicState.bleGattCharacteristicOnReadWaiting'))
+      ..add(DiagnosticsProperty('data', data));
   }
 
   @override
@@ -3788,6 +3936,7 @@ class __$$BleGattCharacteristicOnReadSuccessImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$BleGattCharacteristicOnReadSuccessImpl
+    with DiagnosticableTreeMixin
     implements BleGattCharacteristicOnReadSuccess {
   const _$BleGattCharacteristicOnReadSuccessImpl(this.data);
 
@@ -3795,8 +3944,17 @@ class _$BleGattCharacteristicOnReadSuccessImpl
   final BleGattCharacteristicStateData data;
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'BleGattCharacteristicState.bleGattCharacteristicOnReadSuccess(data: $data)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type',
+          'BleGattCharacteristicState.bleGattCharacteristicOnReadSuccess'))
+      ..add(DiagnosticsProperty('data', data));
   }
 
   @override
@@ -4052,6 +4210,7 @@ class __$$BleGattCharacteristicOnReadFailedImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$BleGattCharacteristicOnReadFailedImpl
+    with DiagnosticableTreeMixin
     implements BleGattCharacteristicOnReadFailed {
   const _$BleGattCharacteristicOnReadFailedImpl(this.data);
 
@@ -4059,8 +4218,17 @@ class _$BleGattCharacteristicOnReadFailedImpl
   final BleGattCharacteristicStateData data;
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'BleGattCharacteristicState.bleGattCharacteristicOnReadFailed(data: $data)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type',
+          'BleGattCharacteristicState.bleGattCharacteristicOnReadFailed'))
+      ..add(DiagnosticsProperty('data', data));
   }
 
   @override
@@ -4316,6 +4484,7 @@ class __$$BleGattCharacteristicUpdateIsExecuteImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$BleGattCharacteristicUpdateIsExecuteImpl
+    with DiagnosticableTreeMixin
     implements BleGattCharacteristicUpdateIsExecute {
   const _$BleGattCharacteristicUpdateIsExecuteImpl(this.data);
 
@@ -4323,8 +4492,17 @@ class _$BleGattCharacteristicUpdateIsExecuteImpl
   final BleGattCharacteristicStateData data;
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'BleGattCharacteristicState.bleGattCharacteristicUpdateIsExecute(data: $data)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type',
+          'BleGattCharacteristicState.bleGattCharacteristicUpdateIsExecute'))
+      ..add(DiagnosticsProperty('data', data));
   }
 
   @override
