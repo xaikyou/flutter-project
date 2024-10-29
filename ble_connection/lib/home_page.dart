@@ -1,7 +1,7 @@
 import 'package:ble_connection/bloc/ble_connectivity/ble_connectivity_bloc.dart';
 import 'package:ble_connection/bloc/device_connectivity/device_connectivity_bloc.dart';
 import 'package:ble_connection/bloc/scan_devices/scan_devices_bloc.dart';
-import 'package:ble_connection/cubit/handles_connection_cubit.dart';
+import 'package:ble_connection/cubit/handles_connection/handles_connection_cubit.dart';
 import 'package:ble_connection/device_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -52,21 +52,7 @@ class _HomePageState extends State<HomePage> {
 
                     /// Show Devices Scanned
                     const SizedBox(height: 16),
-                    BlocBuilder<ScanDevicesBloc, ScanDevicesState>(
-                      builder: (context, state) {
-                        return Expanded(
-                          child: ListView(
-                            shrinkWrap: true,
-                            children: [
-                              ..._buildSystemDeviceTiles(
-                                  context, state.data.connectedDevices),
-                              ..._buildScanResultTiles(
-                                  context, state.data.scanResults),
-                            ],
-                          ),
-                        );
-                      },
-                    ),
+                    _buildDeviceTiles(),
                   ],
                 ),
               );
@@ -159,8 +145,24 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  void _onConnectPressed(BuildContext context, BluetoothDevice device) {
+  void _onConnectPressed(BuildContext context, BluetoothDevice device) async {
     context.read<HandlesConnectionCubit>().handleConnectionToDevice(device);
+  }
+
+  Widget _buildDeviceTiles() {
+    return BlocBuilder<ScanDevicesBloc, ScanDevicesState>(
+      builder: (context, state) {
+        return Expanded(
+          child: ListView(
+            shrinkWrap: true,
+            children: [
+              ..._buildSystemDeviceTiles(context, state.data.connectedDevices),
+              ..._buildScanResultTiles(context, state.data.scanResults),
+            ],
+          ),
+        );
+      },
+    );
   }
 
   List<Widget> _buildSystemDeviceTiles(
@@ -206,26 +208,15 @@ class _HomePageState extends State<HomePage> {
               ? BlocProvider(
                   create: (context) => DeviceConnectivityBloc(r.device)
                     ..add(const DeviceConnectivityWatching()),
-                  child: BlocListener<DeviceConnectivityBloc,
-                      DeviceConnectivityState>(
-                    listener: (context, state) {
-                      if (state.data.connectionState ==
-                          BluetoothConnectionState.connected) {
-                        context
-                            .read<ScanDevicesBloc>()
-                            .add(ScanDevicesUpdateResults(result: r));
-                      }
-                    },
-                    child: ListTile(
-                      contentPadding: EdgeInsets.zero,
-                      title: Text(
-                        r.device.platformName,
-                        style: const TextStyle(fontSize: 20),
-                      ),
-                      onTap: () {
-                        _onConnectPressed(context, r.device);
-                      },
+                  child: ListTile(
+                    contentPadding: EdgeInsets.zero,
+                    title: Text(
+                      r.device.platformName,
+                      style: const TextStyle(fontSize: 20),
                     ),
+                    onTap: () {
+                      _onConnectPressed(context, r.device);
+                    },
                   ),
                 )
               : const SizedBox.shrink(),

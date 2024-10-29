@@ -5,7 +5,7 @@ class DeviceConnectivityStateData with _$DeviceConnectivityStateData {
   const factory DeviceConnectivityStateData({
     @Default(BluetoothConnectionState.disconnected)
     BluetoothConnectionState connectionState,
-    BluetoothService? services,
+    BluetoothService? service,
   }) = _DeviceConnectivityStateData;
 }
 

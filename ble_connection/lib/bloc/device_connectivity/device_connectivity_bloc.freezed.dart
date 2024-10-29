@@ -861,7 +861,7 @@ abstract class DeviceConnectivitySaveItemToLocal
 mixin _$DeviceConnectivityStateData {
   BluetoothConnectionState get connectionState =>
       throw _privateConstructorUsedError;
-  BluetoothService? get services => throw _privateConstructorUsedError;
+  BluetoothService? get service => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $DeviceConnectivityStateDataCopyWith<DeviceConnectivityStateData>
@@ -877,7 +877,7 @@ abstract class $DeviceConnectivityStateDataCopyWith<$Res> {
           DeviceConnectivityStateData>;
   @useResult
   $Res call(
-      {BluetoothConnectionState connectionState, BluetoothService? services});
+      {BluetoothConnectionState connectionState, BluetoothService? service});
 }
 
 /// @nodoc
@@ -895,16 +895,16 @@ class _$DeviceConnectivityStateDataCopyWithImpl<$Res,
   @override
   $Res call({
     Object? connectionState = null,
-    Object? services = freezed,
+    Object? service = freezed,
   }) {
     return _then(_value.copyWith(
       connectionState: null == connectionState
           ? _value.connectionState
           : connectionState // ignore: cast_nullable_to_non_nullable
               as BluetoothConnectionState,
-      services: freezed == services
-          ? _value.services
-          : services // ignore: cast_nullable_to_non_nullable
+      service: freezed == service
+          ? _value.service
+          : service // ignore: cast_nullable_to_non_nullable
               as BluetoothService?,
     ) as $Val);
   }
@@ -920,7 +920,7 @@ abstract class _$$DeviceConnectivityStateDataImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {BluetoothConnectionState connectionState, BluetoothService? services});
+      {BluetoothConnectionState connectionState, BluetoothService? service});
 }
 
 /// @nodoc
@@ -937,16 +937,16 @@ class __$$DeviceConnectivityStateDataImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? connectionState = null,
-    Object? services = freezed,
+    Object? service = freezed,
   }) {
     return _then(_$DeviceConnectivityStateDataImpl(
       connectionState: null == connectionState
           ? _value.connectionState
           : connectionState // ignore: cast_nullable_to_non_nullable
               as BluetoothConnectionState,
-      services: freezed == services
-          ? _value.services
-          : services // ignore: cast_nullable_to_non_nullable
+      service: freezed == service
+          ? _value.service
+          : service // ignore: cast_nullable_to_non_nullable
               as BluetoothService?,
     ));
   }
@@ -958,17 +958,17 @@ class _$DeviceConnectivityStateDataImpl
     implements _DeviceConnectivityStateData {
   const _$DeviceConnectivityStateDataImpl(
       {this.connectionState = BluetoothConnectionState.disconnected,
-      this.services});
+      this.service});
 
   @override
   @JsonKey()
   final BluetoothConnectionState connectionState;
   @override
-  final BluetoothService? services;
+  final BluetoothService? service;
 
   @override
   String toString() {
-    return 'DeviceConnectivityStateData(connectionState: $connectionState, services: $services)';
+    return 'DeviceConnectivityStateData(connectionState: $connectionState, service: $service)';
   }
 
   @override
@@ -978,12 +978,11 @@ class _$DeviceConnectivityStateDataImpl
             other is _$DeviceConnectivityStateDataImpl &&
             (identical(other.connectionState, connectionState) ||
                 other.connectionState == connectionState) &&
-            (identical(other.services, services) ||
-                other.services == services));
+            (identical(other.service, service) || other.service == service));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, connectionState, services);
+  int get hashCode => Object.hash(runtimeType, connectionState, service);
 
   @JsonKey(ignore: true)
   @override
@@ -997,12 +996,12 @@ abstract class _DeviceConnectivityStateData
     implements DeviceConnectivityStateData {
   const factory _DeviceConnectivityStateData(
       {final BluetoothConnectionState connectionState,
-      final BluetoothService? services}) = _$DeviceConnectivityStateDataImpl;
+      final BluetoothService? service}) = _$DeviceConnectivityStateDataImpl;
 
   @override
   BluetoothConnectionState get connectionState;
   @override
-  BluetoothService? get services;
+  BluetoothService? get service;
   @override
   @JsonKey(ignore: true)
   _$$DeviceConnectivityStateDataImplCopyWith<_$DeviceConnectivityStateDataImpl>

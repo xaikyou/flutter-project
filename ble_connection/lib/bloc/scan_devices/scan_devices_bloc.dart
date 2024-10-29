@@ -27,24 +27,6 @@ class ScanDevicesBloc extends Bloc<ScanDevicesEvent, ScanDevicesState> {
     on<ScanDevicesCheck>(
       (event, emit) async => await _onCheckingDevices(emit),
     );
-    on<ScanDevicesUpdateResults>(
-      (event, emit) async => _onUpdateResults(event, emit),
-    );
-  }
-
-  Future<void> _onUpdateResults(
-      ScanDevicesUpdateResults event, Emitter<ScanDevicesState> emit) async {
-    final scanResults = [...state.data.scanResults];
-    final connectedDevices = [...state.data.connectedDevices];
-    scanResults.removeWhere(
-      (element) => element.device.remoteId == event.result.device.remoteId,
-    );
-    await _onStopScan(emit);
-    connectedDevices.add(event.result.device);
-    emit(ScanDevicesUpdated(state.data.copyWith(
-      scanResults: scanResults,
-      connectedDevices: connectedDevices,
-    )));
   }
 
   Future<void> _onScanningDevices(Emitter<ScanDevicesState> emit) async {

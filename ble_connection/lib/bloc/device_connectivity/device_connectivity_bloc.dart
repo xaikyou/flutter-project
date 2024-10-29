@@ -45,7 +45,7 @@ class DeviceConnectivityBloc
     try {
       final services = await device.discoverServices();
       emit(DeviceConnectivityGettingServices(state.data.copyWith(
-          services: services.firstWhere(
+          service: services.firstWhere(
         (s) => s.serviceUuid.toString() == DlConfigConstant.serviceId,
       ))));
     } catch (_) {}
@@ -55,7 +55,7 @@ class DeviceConnectivityBloc
       Emitter<DeviceConnectivityState> emit) async {
     emit(
       DeviceConnectivityDeviceServicesCleared(
-          state.data.copyWith(services: null)),
+          state.data.copyWith(service: null)),
     );
   }
 }

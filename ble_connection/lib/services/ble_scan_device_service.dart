@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:ble_connection/constants/duration.dart';
-import 'package:ble_connection/utils/snackbar.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 import 'package:injectable/injectable.dart';
 
@@ -41,10 +41,7 @@ class BleScanDeviceService {
         // removeIfGone: const Duration(seconds: 5),
       );
     } catch (e) {
-      Snackbar.show(
-        prettyException("Start Scan Error:", e),
-        success: false,
-      );
+      debugPrint('$e');
     }
   }
 
@@ -52,10 +49,7 @@ class BleScanDeviceService {
     try {
       await FlutterBluePlus.stopScan();
     } catch (e) {
-      Snackbar.show(
-        prettyException("Stop Scan Error:", e),
-        success: false,
-      );
+      debugPrint('$e');
     }
   }
 

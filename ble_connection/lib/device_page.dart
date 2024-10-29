@@ -1,4 +1,8 @@
+import 'package:ble_connection/bloc/ble_gatt_characteristic/ble_gatt_characteristic_bloc.dart';
 import 'package:ble_connection/bloc/device_connectivity/device_connectivity_bloc.dart';
+import 'package:ble_connection/bloc/enums/dl_notify_code.dart';
+import 'package:ble_connection/constants/dl_config_constant.dart';
+import 'package:ble_connection/functions/format_dl_value.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_blue_plus/flutter_blue_plus.dart';
@@ -33,6 +37,21 @@ class DevicePage extends StatelessWidget {
                   .read<DeviceConnectivityBloc>()
                   .add(DeviceConnectivitySaveItemToLocal(device));
             }
+            if (state is DeviceConnectivityChanged &&
+                state.data.connectionState ==
+                    BluetoothConnectionState.disconnected) {
+              context
+                  .read<DeviceConnectivityBloc>()
+                  .add(const DeviceConnectivityClearServices());
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(
+                    backgroundColor: Colors.black,
+                    content: Text(
+                      'Device has disconnected.',
+                      style: TextStyle(fontSize: 14),
+                    )),
+              );
+            }
           }),
         ],
         child: Scaffold(
@@ -42,6 +61,36 @@ class DevicePage extends StatelessWidget {
               style: TextStyle(fontWeight: FontWeight.bold),
             ),
             centerTitle: true,
+            actions: [
+              BlocBuilder<DeviceConnectivityBloc, DeviceConnectivityState>(
+                builder: (context, state) {
+                  return CircleAvatar(
+                    backgroundColor: state.data.connectionState ==
+                            BluetoothConnectionState.connected
+                        ? Colors.lightGreen
+                        : Colors.red,
+                    radius: 8,
+                  );
+                },
+              ),
+              BlocBuilder<DeviceConnectivityBloc, DeviceConnectivityState>(
+                builder: (context, state) {
+                  return Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: IconButton(
+                      onPressed: () => state.data.connectionState ==
+                              BluetoothConnectionState.connected
+                          ? device.disconnect()
+                          : device.connect(),
+                      icon: const Icon(
+                        Icons.power_settings_new_rounded,
+                        size: 24,
+                      ),
+                    ),
+                  );
+                },
+              ),
+            ],
           ),
           body: Padding(
             padding: const EdgeInsets.all(16),
@@ -57,13 +106,13 @@ class DevicePage extends StatelessWidget {
                 ),
                 BlocBuilder<DeviceConnectivityBloc, DeviceConnectivityState>(
                   builder: (context, state) {
-                    final services = state.data.services;
+                    final services = state.data.service;
                     if (services == null) {
-                      return const Text('muahahaha');
-                      // return const SizedBox.shrink();
+                      return const Center(
+                          child: Text('No availabel services.'));
                     }
                     return DeviceServicePage(
-                      services: services,
+                      service: services,
                     );
                   },
                 ),
@@ -77,12 +126,52 @@ class DevicePage extends StatelessWidget {
 }
 
 class DeviceServicePage extends StatelessWidget {
-  const DeviceServicePage({super.key, required this.services});
+  const DeviceServicePage({super.key, required this.service});
 
-  final BluetoothService services;
+  final BluetoothService service;
 
   @override
   Widget build(BuildContext context) {
-    return Text(services.toString());
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) =>
+              BleGattCharacteristicBloc(service.characteristics)
+                ..add(const BleGattCharacteristicWatchNotify())
+                ..add(const BleGattCharacteristicWatchRead())
+                ..add(const BleGattCharacteristicWatchWrite()),
+        ),
+      ],
+      child:
+          BlocListener<BleGattCharacteristicBloc, BleGattCharacteristicState>(
+        listener: (context, state) {
+          if (state is BleGattCharacteristicSetNotifyValue) {
+            final value = state.data.value;
+            if (value != null && value.isNotEmpty) {
+              if (value == CmdCode.LOGIN_OK.toRawValue()) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                      backgroundColor: Colors.green,
+                      content: Text(
+                        value,
+                        style: const TextStyle(fontSize: 14),
+                      )),
+                );
+              } else {
+                String hashValue = FormatDlValue.getHashValue(
+                        value + DlConfigConstant.generalCode)
+                    .toUpperCase();
+                context
+                    .read<BleGattCharacteristicBloc>()
+                    .add(BleGattCharacteristicOnWrite(hashValue));
+              }
+            }
+          } else {
+            debugPrint('EMPTY VALUE');
+          }
+        },
+        child: const Text('muahahaha'),
+      ),
+    );
   }
 }
