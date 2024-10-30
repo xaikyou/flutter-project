@@ -3,12 +3,12 @@ import 'package:bloc/bloc.dart';
 import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'handles_connection_cubit.freezed.dart';
-part 'handles_connection_state.dart';
+part 'handle_connection_cubit.freezed.dart';
+part 'handle_connection_state.dart';
 
-class HandlesConnectionCubit extends Cubit<HandlesConnectionState> {
-  HandlesConnectionCubit()
-      : super(const _HandlesConnectionInitial(HandlesConnectionStateData()));
+class HandleConnectionCubit extends Cubit<HandleConnectionState> {
+  HandleConnectionCubit()
+      : super(const _HandleConnectionInitial(HandleConnectionStateData()));
 
   Future<void> handleConnectionToDevice(BluetoothDevice device) async {
     emit(Connecting(

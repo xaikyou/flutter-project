@@ -1,6 +1,8 @@
+import 'package:ble_connection/bloc/ble_device_bond/ble_device_bond_bloc.dart';
 import 'package:ble_connection/bloc/ble_gatt_characteristic/ble_gatt_characteristic_bloc.dart';
 import 'package:ble_connection/bloc/device_connectivity/device_connectivity_bloc.dart';
 import 'package:ble_connection/constants/dl_config_constant.dart';
+import 'package:ble_connection/cubit/handles_connection/handle_connection_cubit.dart';
 import 'package:ble_connection/enums/dl_notify_code.dart';
 import 'package:ble_connection/functions/format_dl_value.dart';
 import 'package:flutter/material.dart';
@@ -22,21 +24,38 @@ class DevicePage extends StatelessWidget {
         BlocProvider(
             create: (context) => DeviceConnectivityBloc(device)
               ..add(const DeviceConnectivityWatching())),
+        BlocProvider(create: (context) => HandleConnectionCubit()),
+        BlocProvider(
+            create: (context) => BleDeviceBondBloc(device: device)
+              ..add(const BleDeviceBondWatch())),
       ],
       child: MultiBlocListener(
         listeners: [
+          BlocListener<BleDeviceBondBloc, BleDeviceBondState>(
+            listener: (context, state) {
+              if (state is BleDeviceBondUpdateState &&
+                  state.data.bondState == BluetoothBondState.bonded) {
+                context
+                    .read<DeviceConnectivityBloc>()
+                    .add(const DeviceConnectivityGetServices());
+                context
+                    .read<DeviceConnectivityBloc>()
+                    .add(DeviceConnectivitySaveItemToLocal(device));
+              }
+            },
+          ),
           BlocListener<DeviceConnectivityBloc, DeviceConnectivityState>(
               listener: (context, state) {
-            if (state is DeviceConnectivityChanged &&
-                state.data.connectionState ==
-                    BluetoothConnectionState.connected) {
-              context
-                  .read<DeviceConnectivityBloc>()
-                  .add(const DeviceConnectivityGetServices());
-              context
-                  .read<DeviceConnectivityBloc>()
-                  .add(DeviceConnectivitySaveItemToLocal(device));
-            }
+            // if (state is DeviceConnectivityChanged &&
+            //     state.data.connectionState ==
+            //         BluetoothConnectionState.connected) {
+            //   context
+            //       .read<DeviceConnectivityBloc>()
+            //       .add(const DeviceConnectivityGetServices());
+            //   context
+            //       .read<DeviceConnectivityBloc>()
+            //       .add(DeviceConnectivitySaveItemToLocal(device));
+            // }
             if (state is DeviceConnectivityChanged &&
                 state.data.connectionState ==
                     BluetoothConnectionState.disconnected) {
@@ -80,8 +99,12 @@ class DevicePage extends StatelessWidget {
                     child: IconButton(
                       onPressed: () => state.data.connectionState ==
                               BluetoothConnectionState.connected
-                          ? device.disconnect()
-                          : device.connect(),
+                          ? context
+                              .read<HandleConnectionCubit>()
+                              .handleCancelConnectionToDevice(device)
+                          : context
+                              .read<HandleConnectionCubit>()
+                              .handleConnectionToDevice(device),
                       icon: const Icon(
                         Icons.power_settings_new_rounded,
                         size: 24,

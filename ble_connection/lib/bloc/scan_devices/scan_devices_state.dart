@@ -15,10 +15,10 @@ class ScanDevicesState with _$ScanDevicesState {
       ScanDevicesInitial;
   const factory ScanDevicesState.scanDevicesInProgress(
       ScanDevicesStateData data) = ScanDevicesInProgress;
-  const factory ScanDevicesState.scanDevicesUpdated(ScanDevicesStateData data) =
-      ScanDevicesUpdated;
   const factory ScanDevicesState.scanDevicesStopped(ScanDevicesStateData data) =
       ScanDevicesStopped;
   const factory ScanDevicesState.scanDevicesFailure(ScanDevicesStateData data) =
       ScanDevicesFailure;
+  const factory ScanDevicesState.scanDevicesUpdated(ScanDevicesStateData data) =
+      ScanDevicesUpdated;
 }

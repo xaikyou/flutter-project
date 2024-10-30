@@ -1,7 +1,8 @@
 import 'package:ble_connection/bloc/ble_connectivity/ble_connectivity_bloc.dart';
 import 'package:ble_connection/bloc/device_connectivity/device_connectivity_bloc.dart';
 import 'package:ble_connection/bloc/scan_devices/scan_devices_bloc.dart';
-import 'package:ble_connection/cubit/handles_connection/handles_connection_cubit.dart';
+import 'package:ble_connection/cubit/handles_connection/handle_connection_cubit.dart';
+import 'package:ble_connection/cubit/intermediate_layer/intermediate_layer_cubit.dart';
 import 'package:ble_connection/device_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -24,7 +25,8 @@ class _HomePageState extends State<HomePage> {
             ..add(const ScanDevicesScanning())
             ..add(const ScanDevicesCheck()),
         ),
-        BlocProvider(create: (context) => HandlesConnectionCubit()),
+        BlocProvider(create: (context) => HandleConnectionCubit()),
+        BlocProvider(create: (context) => IntermediateLayerCubit()),
       ],
       child: Scaffold(
         body: SafeArea(
@@ -146,7 +148,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   void _onConnectPressed(BuildContext context, BluetoothDevice device) async {
-    context.read<HandlesConnectionCubit>().handleConnectionToDevice(device);
+    context.read<HandleConnectionCubit>().handleConnectionToDevice(device);
   }
 
   Widget _buildDeviceTiles() {
@@ -174,26 +176,69 @@ class _HomePageState extends State<HomePage> {
                 bloc.add(const DeviceConnectivityWatching());
                 return bloc;
               },
-              child: ListTile(
-                contentPadding: EdgeInsets.zero,
-                title: Text(
-                  d.platformName,
-                  style: const TextStyle(fontSize: 20, color: Colors.redAccent),
-                ),
-                subtitle: const Text(
-                  'Connected',
-                  style: TextStyle(fontSize: 16, color: Colors.redAccent),
-                ),
-                trailing: const Icon(
-                  Icons.arrow_forward_ios_rounded,
-                ),
-                onTap: () => Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => DevicePage(
-                            device: d,
-                          )),
-                ),
+              child: BlocBuilder<IntermediateLayerCubit,
+                  IntermediateLayerCubitState>(
+                builder: (context, intermediateState) {
+                  return BlocListener<DeviceConnectivityBloc,
+                      DeviceConnectivityState>(
+                    listener: (context, state) {
+                      if (state is DeviceConnectivityChanged) {
+                        final intermediateLayer = [
+                          ...intermediateState.results
+                        ];
+
+                        final scanDevicesBloc = context.read<ScanDevicesBloc>();
+                        final scanResults = [
+                          ...scanDevicesBloc.state.data.scanResults
+                        ];
+                        final connectedDevices = [
+                          ...scanDevicesBloc.state.data.connectedDevices
+                        ];
+
+                        if (state.data.connectionState ==
+                            BluetoothConnectionState.disconnected) {
+                          connectedDevices
+                              .removeWhere((e) => e.remoteId == d.remoteId);
+                          final device = intermediateLayer.firstWhere(
+                              (e) => e.device.remoteId == d.remoteId);
+                          scanResults.add(device);
+
+                          intermediateLayer.removeWhere(
+                              (e) => e.device.remoteId == d.remoteId);
+                          context
+                              .read<IntermediateLayerCubit>()
+                              .update(intermediateLayer);
+                        }
+
+                        scanDevicesBloc.add(ScanDevicesUpdate(
+                            results: scanResults, devices: connectedDevices));
+                      }
+                    },
+                    child: ListTile(
+                      contentPadding: EdgeInsets.zero,
+                      title: Text(
+                        d.platformName,
+                        style: const TextStyle(
+                            fontSize: 20, color: Colors.redAccent),
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                      subtitle: const Text(
+                        'Connected',
+                        style: TextStyle(fontSize: 16, color: Colors.redAccent),
+                      ),
+                      trailing: const Icon(
+                        Icons.arrow_forward_ios_rounded,
+                      ),
+                      onTap: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => DevicePage(
+                                  device: d,
+                                )),
+                      ),
+                    ),
+                  );
+                },
               ),
             ))
         .toList();
@@ -208,15 +253,52 @@ class _HomePageState extends State<HomePage> {
               ? BlocProvider(
                   create: (context) => DeviceConnectivityBloc(r.device)
                     ..add(const DeviceConnectivityWatching()),
-                  child: ListTile(
-                    contentPadding: EdgeInsets.zero,
-                    title: Text(
-                      r.device.platformName,
-                      style: const TextStyle(fontSize: 20),
-                    ),
-                    onTap: () {
-                      _onConnectPressed(context, r.device);
+                  child: BlocListener<DeviceConnectivityBloc,
+                      DeviceConnectivityState>(
+                    listener: (context, state) {
+                      if (state is DeviceConnectivityChanged) {
+                        final scanDevicesBloc = context.read<ScanDevicesBloc>();
+                        final scanResults = [
+                          ...scanDevicesBloc.state.data.scanResults
+                        ];
+                        final connectedDevices = [
+                          ...scanDevicesBloc.state.data.connectedDevices
+                        ];
+
+                        if (state.data.connectionState ==
+                            BluetoothConnectionState.connected) {
+                          scanResults.removeWhere(
+                              (e) => e.device.remoteId == r.device.remoteId);
+                          context.read<IntermediateLayerCubit>().add(r);
+                          connectedDevices.add(r.device);
+                        }
+
+                        scanDevicesBloc.add(ScanDevicesUpdate(
+                            results: scanResults, devices: connectedDevices));
+                      }
                     },
+                    child: BlocBuilder<HandleConnectionCubit,
+                        HandleConnectionState>(
+                      builder: (context, state) {
+                        return ListTile(
+                          contentPadding: EdgeInsets.zero,
+                          title: Text(
+                            r.device.platformName,
+                            style: const TextStyle(
+                              fontSize: 20,
+                              color: Colors.black,
+                            ),
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                          trailing: state.data.devices.contains(r.device)
+                              ? const CircularProgressIndicator()
+                              : null,
+                          onTap: () {
+                            _onConnectPressed(context, r.device);
+                          },
+                        );
+                      },
+                    ),
                   ),
                 )
               : const SizedBox.shrink(),

@@ -27,6 +27,16 @@ class ScanDevicesBloc extends Bloc<ScanDevicesEvent, ScanDevicesState> {
     on<ScanDevicesCheck>(
       (event, emit) async => await _onCheckingDevices(emit),
     );
+    on<ScanDevicesUpdate>(
+      (event, emit) => _onUpdate(event, emit),
+    );
+  }
+
+  void _onUpdate(ScanDevicesUpdate event, Emitter<ScanDevicesState> emit) {
+    emit(ScanDevicesUpdated(state.data.copyWith(
+      scanResults: event.results,
+      connectedDevices: event.devices,
+    )));
   }
 
   Future<void> _onScanningDevices(Emitter<ScanDevicesState> emit) async {
